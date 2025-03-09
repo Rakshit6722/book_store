@@ -15,10 +15,10 @@ function AuthTemplate({ container }: authTemplateProps) {
 
   const [passwordVisibie, setPasswordVisible] = React.useState(false)
   const [error, setError] = React.useState({
-    fullName:"",
-    email:"",
-    password:"",
-    mobile:""
+    fullName: "",
+    email: "",
+    password: "",
+    mobile: ""
   })
 
 
@@ -101,7 +101,9 @@ function AuthTemplate({ container }: authTemplateProps) {
                       </>) : (<>
                         <IoEye onClick={() => setPasswordVisible(!passwordVisibie)} className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]' />
                       </>)}
-                      <p className='w-full text-right text-xs text-[#9D9D9D] mt-1 cursor-pointer'>Forget Password?</p>
+                      <NavLink to={'forgotPassword'}>
+                        <p className='w-full text-right text-xs text-[#9D9D9D] mt-1 cursor-pointer'>Forget Password?</p>
+                      </NavLink>
                     </div>
                   </div>
                   <div className='flex flex-col items-center mt-2'>

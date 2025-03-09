@@ -5,7 +5,7 @@ import { FaRegUser } from "react-icons/fa6";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
 type headerProps = {
-    container: string
+    container?: string
 }
 
 const Header = ({ container }: headerProps) => {
