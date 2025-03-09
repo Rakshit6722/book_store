@@ -14,12 +14,18 @@ function AuthTemplate({ container }: authTemplateProps) {
   console.log(location.pathname.split('/')[1])
 
   const [passwordVisibie, setPasswordVisible] = React.useState(false)
+  const [error, setError] = React.useState({
+    fullName:"",
+    email:"",
+    password:"",
+    mobile:""
+  })
 
 
   return (
     <div className='flex items-center justify-center h-screen bg-[#9D9D9D]'>
-      <div className='flex items-center justify-center w-screen relative mr-52'>
-        <div className='bg-[#F5F5F5] w-1/3 h-[391px] border-2 bg-white rounded-3xl shadow-xl flex flex-col space-y-6 align-center justify-center p-2'>
+      <div className='sm:flex-col flex items-center justify-center w-screen md:relative mr-52'>
+        <div className='bg-[#F5F5F5] w-1/3 h-[391px] border-2 rounded-3xl shadow-xl flex flex-col space-y-6 align-center justify-center p-2'>
           <div className=' flex ml-12 align-center'>
             <img className='rounded-full w-[55%]' src={loginSignUpImage} alt='login-signup-image' />
           </div>
@@ -27,7 +33,7 @@ function AuthTemplate({ container }: authTemplateProps) {
             <p className='font-semibold text-[#0A0102]'>ONLINE BOOK SHOPPING</p>
           </div>
         </div>
-        <div className='bg-[#FFFFFF] w-96 h-[440px] border-2 rounded-[7px] shadow-xl z-10 absolute right-[202px] px-3'>
+        <div className='bg-[#FFFFFF] w-96 h-[440px] border-2 rounded-[7px] shadow-xl z-10 md:absolute right-[202px] px-3'>
           <div className='w-full'>
             <div className={'flex justify-center font-semibold text-2xl px-12 py-5 pb-0 space-x-14 mt-1'}>
               <div className='mr-8'>
@@ -51,10 +57,12 @@ function AuthTemplate({ container }: authTemplateProps) {
                   <div className='flex flex-col items-center'>
                     <label className='text-xs font-normal self-start' htmlFor='fullName'>Full Name</label>
                     <input type='text' id='fullName' className='w-full h-9 border-2 rounded-sm p-2 outline-none focus:border-red-600' />
+                    {error.fullName && <p className='text-red-600 text-xs'>{error.fullName}</p>}
                   </div>
                   <div className='flex flex-col items-center'>
                     <label className='text-xs font-normal self-start' htmlFor='email'>Email Id</label>
                     <input type='text' id='email' className='w-full h-9 border-2 rounded-sm p-2 outline-none focus:border-red-600' />
+                    {error.email && <p className='text-red-600 text-xs'>{error.email}</p>}
                   </div>
                   <div className='flex flex-col items-center'>
                     <label className='text-xs font-normal self-start' htmlFor='password'>Password</label>
@@ -66,10 +74,12 @@ function AuthTemplate({ container }: authTemplateProps) {
                         <IoEye onClick={() => setPasswordVisible(!passwordVisibie)} className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]' />
                       </>)}
                     </div>
+                    {error.password && <p className='text-red-600 text-xs'>{error.password}</p>}
                   </div>
                   <div className='flex flex-col items-center'>
                     <label className='text-xs font-normal self-start' htmlFor='mobileNumber'>Mobile Number</label>
                     <input type='text' id='mobileNumber' className='w-full h-9 border-2 rounded-sm p-2 outline-none focus:border-red-600' />
+                    {error.mobile && <p className='text-red-600 text-xs'>{error.mobile}</p>}
                   </div>
                   <div className='flex flex-col items-center mt-2'>
                     <button className='bg-[#A03037] text-sm text-white w-full h-9 rounded-sm p-1 mt-3'>Signup</button>
