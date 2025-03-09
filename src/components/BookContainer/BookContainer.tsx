@@ -3,6 +3,7 @@ import { DownOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Dropdown, Space } from 'antd';
 import BookCatalogue from './BookCatalogue';
+import Footer from '../Common/Footer';
 
 const items: MenuProps['items'] = [
     {
@@ -32,16 +33,16 @@ const items: MenuProps['items'] = [
 
 const BookContainer = () => {
     return (
-        <div className='w-[78%] mx-auto p-7'>
-            <div className='flex justify-between'>
+        <div className='max-w-6xl mx-auto p-8'>
+            <div className='flex justify-between items-center mb-6'>
                 <div className='flex items-center space-x-2'>
                     <p className='text-2xl font-semibold'>Books</p>
                     <p className='text-sm text-gray-400'>(123 items)</p>
                 </div>
-                <div className='cursor-pointer border-2 border-black-600 w-40 flex items-center py-1 px-2'>
+                <div className='cursor-pointer border-2 border-black-600 w-40 flex items-center justify-center py-1 px-2'>
                     <Dropdown menu={{ items }} trigger={['click']}>
                         <a onClick={(e) => e.preventDefault()}>
-                            <Space className='flex space-x-2'>
+                            <Space className='flex justify-between items-center w-full'>
                                 <p className='text-xs font-semibold'>Sort by relevance</p>
                                 <DownOutlined />
                             </Space>
@@ -50,10 +51,9 @@ const BookContainer = () => {
                 </div>
             </div>
 
-            <div>
+            <div className='mt-4 min-h-[70vh]'>
                 <BookCatalogue/>
             </div>
-            Book container
         </div>
     )
 }
