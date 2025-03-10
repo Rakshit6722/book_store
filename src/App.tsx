@@ -8,6 +8,7 @@ import ForgotPassword from './pages/ForgotPassword'
 import BookPage from './pages/BookPage'
 import MyOrders from './pages/MyOrders'
 import Wishlist from './pages/Wishlist'
+import Profile from './pages/Profile'
 
 
 const App = () => {
@@ -18,7 +19,7 @@ const App = () => {
         <Route path='/register' element={<Register/>}/>
         <Route path='/forgotPassword' element={<ForgotPassword/>}/>
         <Route path='/home' element={<Home/>}/>
-        <Route/>
+        <Route path='/profile' element={<Profile/>}/>
         <Route path='/home/:id' element={<BookPage/>}/>
         <Route path='/myOrder' element={<MyOrders/>}/>
         <Route path='wishlist' element={<Wishlist/>}/>
