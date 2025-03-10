@@ -23,7 +23,7 @@ function AuthTemplate({ container }: authTemplateProps) {
 
 
   return (
-    <div className='flex p-4 md:p-0 items-center justify-center h-screen bg-[#9D9D9D]'>
+    <div className='flex p-4 md:p-0 items-center justify-center h-[100dvh] bg-[#9D9D9D]'>
       {/* Only changing the tablet-specific classes with sm: and md: prefixes */}
       <div className='md:flex items-center justify-center w-screen sm:relative md:mr-52'>
         {/* Add sm:hidden to hide on mobile, but sm:flex to show on tablets */}

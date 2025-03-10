@@ -2,7 +2,7 @@ import axios, { AxiosResponse, Method } from "axios";
 
 const axiosInstance = axios.create({})
 
-axios.interceptors.request.use(
+axiosInstance.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
         if (token) {

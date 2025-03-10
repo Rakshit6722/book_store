@@ -6,6 +6,8 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import ForgotPassword from './pages/ForgotPassword'
 import BookPage from './pages/BookPage'
+import MyOrders from './pages/MyOrders'
+import Wishlist from './pages/Wishlist'
 
 
 const App = () => {
@@ -17,6 +19,8 @@ const App = () => {
         <Route path='/forgotPassword' element={<ForgotPassword/>}/>
         <Route path='/home' element={<Home/>}/>
         <Route path='/home/:id' element={<BookPage/>}/>
+        <Route path='/myOrder' element={<MyOrders/>}/>
+        <Route path='wishlist' element={<Wishlist/>}/>
       </Routes>
     </div>
   )

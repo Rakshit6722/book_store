@@ -17,7 +17,7 @@ const Book = ({book}:bookProps) => {
   return (
     <div className='flex flex-col w-full max-w-[240px] h-[275px] border-2 hover:shadow-lg '>
       <div className='w-full h-[172px] flex items-center justify-center bg-[#F5F5F5]'>
-        <img className='w-24 object-contain' src={book?.cover} alt={book?.title}/>
+        <img loading='lazy' className='w-24 object-contain' src={book?.cover} alt={book?.title}/>
       </div>
       <div className='w-full p-4'>
         <p className='text-md font-semibold'>{book?.title}</p>
