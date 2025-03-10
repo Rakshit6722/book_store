@@ -23,9 +23,11 @@ function AuthTemplate({ container }: authTemplateProps) {
 
 
   return (
-    <div className='flex items-center justify-center h-screen bg-[#9D9D9D]'>
-      <div className='sm:flex-col flex items-center justify-center w-screen md:relative mr-52'>
-        <div className='bg-[#F5F5F5] w-1/3 h-[391px] border-2 rounded-3xl shadow-xl flex flex-col space-y-6 align-center justify-center p-2'>
+    <div className='flex p-4 md:p-0 items-center justify-center h-screen bg-[#9D9D9D]'>
+      {/* Only changing the tablet-specific classes with sm: and md: prefixes */}
+      <div className='md:flex items-center justify-center w-screen sm:relative md:mr-52'>
+        {/* Add sm:hidden to hide on mobile, but sm:flex to show on tablets */}
+        <div className='bg-[#F5F5F5] w-1/3 h-[391px] hidden sm:flex md:flex border-2 rounded-3xl shadow-xl flex-col space-y-6 align-center justify-center p-2'>
           <div className=' flex ml-12 align-center'>
             <img className='rounded-full w-[55%]' src={loginSignUpImage} alt='login-signup-image' />
           </div>
@@ -33,7 +35,8 @@ function AuthTemplate({ container }: authTemplateProps) {
             <p className='font-semibold text-[#0A0102]'>ONLINE BOOK SHOPPING</p>
           </div>
         </div>
-        <div className='bg-[#FFFFFF] w-96 h-[440px] border-2 rounded-[7px] shadow-xl z-10 md:absolute right-[202px] px-3'>
+        {/* Adjust positioning for tablet */}
+        <div className='bg-[#FFFFFF] md:w-96 h-[440px] border-2 rounded-[7px] shadow-xl z-10 sm:static sm:ml-4 md:absolute md:left-15 lg:right-[202px] px-3'>
           <div className='w-full'>
             <div className={'flex justify-center font-semibold text-2xl px-12 py-5 pb-0 space-x-14 mt-1'}>
               <div className='mr-8'>

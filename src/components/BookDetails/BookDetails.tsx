@@ -21,14 +21,14 @@ function BookDetails() {
     }
 
     const decrementCart = () => {
-        if(cartCount > 1) {
+        if (cartCount > 1) {
             setCartCount(prevCount => prevCount - 1)
         }
     }
 
     return (
-        <div className='flex mt-6'>
-            <div className='w-[40%] flex-col'>
+        <div className='flex flex-col md:flex-row mt-6'>
+            <div className='md:w-[40%] flex-col'>
                 <div className='flex'>
                     <div>
                         <div onClick={() => setImageActive(0)} className={`cursor-pointer h-[68px] p-2 flex justify-center items-center border-2 ${imageActive === 0 ? 'border-red-500' : 'border-[#E0E0E0]'}`}>
@@ -42,33 +42,33 @@ function BookDetails() {
                         <img className='w-72' src={images[imageActive]} alt="" />
                     </div>
                 </div>
-                <div className='flex ml-2 w-full space-x-2 justify-end p-6'>
+                <div className='flex xl:gap-2 ml-2 xl:ml-0 w-full space-x-2 justify-end p-2 md:p-4'>
                     {
                         addToCart ? (
-                            <div className='h-12 w-44 mr-2 flex items-center justify-between'>
-                                <div onClick={decrementCart} className='cursor-pointer w-10 h-10 flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border-2 rounded-full'>
-                                    <p className={`${cartCount === 1 ? "text-[#DBDBDB]" : "text-black"} text-xl`}><FaMinus/></p>
+                            <div className='h-10 md:h-12 w-32 sm:w-36 md:w-40 flex items-center justify-between'>
+                                <div onClick={decrementCart} className='cursor-pointer w-7 sm:w-8 md:w-9 h-7 sm:h-8 md:h-9 flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border-2 rounded-full'>
+                                    <p className={`${cartCount === 1 ? "text-[#DBDBDB]" : "text-black"} text-base sm:text-lg`}><FaMinus /></p>
                                 </div>
-                                <div className='w-20 h-10 select-none flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border-2'>
-                                    <p className='text-2xl'>{cartCount}</p>
+                                <div className='w-8 sm:w-10 md:w-12 h-7 sm:h-8 md:h-9 select-none flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border-2'>
+                                    <p className='text-lg sm:text-xl'>{cartCount}</p>
                                 </div>
-                                <div onClick={incrementCart} className='cursor-pointer w-10 h-10 flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border-2 rounded-full'>
-                                    <p className='text-2xl'><IoAdd/></p>
+                                <div onClick={incrementCart} className='cursor-pointer w-7 sm:w-8 md:w-9 h-7 sm:h-8 md:h-9 flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border-2 rounded-full'>
+                                    <p className='text-lg sm:text-xl'><IoAdd /></p>
                                 </div>
                             </div>
                         ) : (
-                            <button onClick={() => setAddToCart(true)} className='h-12 w-44 bg-[#A03037] text-white flex items-center justify-center'>ADD TO BAG</button>
+                            <button onClick={() => setAddToCart(true)} className='h-10 md:h-12 w-32 sm:w-36 md:w-40 bg-[#A03037] text-white flex items-center justify-center'>ADD TO BAG</button>
                         )
                     }
-                    <div className='h-12 flex select-none items-center justify-center gap-4 w-44 bg-[#373434] cursor-pointer text-white'>
+                    <div className='h-10 md:h-12 flex select-none items-center justify-center gap-1 sm:gap-2 md:gap-3 w-32 sm:w-36 md:w-40 bg-[#373434] cursor-pointer text-white'>
                         <div>
                             <FaHeart className='text-white' />
                         </div>
-                        <p>WISHLIST</p>
+                        <p className='text-xs sm:text-sm md:text-base'>WISHLIST</p>
                     </div>
                 </div>
             </div>
-            <div className='w-[60%] flex flex-col gap-6 ml-6'>
+            <div className='md:w-[60%] flex flex-col gap-6 ml-6'>
                 <div className='flex select-none flex-col gap-1 border-b-2 border-[#E0E0E0] w-full'>
                     <p className='text-3xl text-[#373434]'>Don't Make Me Think</p>
                     <p className='text-[#878787] text-lg'>by Steve Krug</p>

@@ -33,11 +33,11 @@ const items: MenuProps['items'] = [
 
 const BookContainer = () => {
     return (
-        <div className='max-w-6xl mx-auto p-8'>
+        <div className='max-w-6xl mx-auto p-4 md:p-8'>
             <div className='flex justify-between items-center mb-6'>
                 <div className='flex items-center space-x-2'>
-                    <p className='text-2xl font-semibold'>Books</p>
-                    <p className='text-sm text-gray-400'>(123 items)</p>
+                    <p className='text-lg md:text-2xl font-semibold'>Books</p>
+                    <p className='text-xs md:text-sm text-gray-400'>(123 items)</p>
                 </div>
                 <div className='cursor-pointer border-2 border-black-600 w-40 flex items-center justify-center py-1 px-2'>
                     <Dropdown menu={{ items }} trigger={['click']}>
