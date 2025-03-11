@@ -4,6 +4,7 @@ import { IoIosSearch } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa6";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { IoSearch } from 'react-icons/io5';
+import ProfileDropdown from './ProfileDropdown';
 
 type headerProps = {
     container?: string
@@ -38,12 +39,7 @@ const Header = ({ container }: headerProps) => {
                                 </div>
                                 <p className='text-white hidden md:block text-xs mt-1'>Search</p>
                             </div>
-                            <div className='flex flex-col items-center justify-center cursor-pointer'>
-                                <div className='flex items-center justify-center h-6'>
-                                    <FaRegUser className='text-white text-xl' />
-                                </div>
-                                <p className='text-white hidden md:block text-xs mt-1'>Profile</p>
-                            </div>
+                            <ProfileDropdown/>
                             <div className='flex flex-col items-center justify-center cursor-pointer'>
                                 <div className='flex items-center justify-center h-6'>
                                     <AiOutlineShoppingCart className='text-white text-xl' />
