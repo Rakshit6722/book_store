@@ -23,10 +23,10 @@ function AuthTemplate({ container }: authTemplateProps) {
 
 
   return (
-    <div className='flex p-4 md:p-0 items-center justify-center h-[100dvh] bg-[#9D9D9D]'>
-      {/* Only changing the tablet-specific classes with sm: and md: prefixes */}
+    <div data-testid="authTemplate" className='flex p-4 md:p-0 items-center justify-center h-[100dvh] bg-[#9D9D9D]'>
+
       <div className='md:flex items-center justify-center w-screen sm:relative md:mr-52'>
-        {/* Add sm:hidden to hide on mobile, but sm:flex to show on tablets */}
+ 
         <div className='bg-[#F5F5F5] w-1/3 h-[391px] hidden sm:flex md:flex border-2 rounded-3xl shadow-xl flex-col space-y-6 align-center justify-center p-2'>
           <div className=' flex ml-12 align-center'>
             <img className='rounded-full w-[55%]' src={loginSignUpImage} alt='login-signup-image' />
@@ -35,7 +35,7 @@ function AuthTemplate({ container }: authTemplateProps) {
             <p className='font-semibold text-[#0A0102]'>ONLINE BOOK SHOPPING</p>
           </div>
         </div>
-        {/* Adjust positioning for tablet */}
+
         <div className='bg-[#FFFFFF] md:w-96 h-[440px] border-2 rounded-[7px] shadow-xl z-10 sm:static sm:ml-4 md:absolute md:left-15 lg:right-[202px] px-3'>
           <div className='w-full'>
             <div className={'flex justify-center font-semibold text-2xl px-12 py-5 pb-0 space-x-14 mt-1'}>
@@ -72,9 +72,9 @@ function AuthTemplate({ container }: authTemplateProps) {
                     <div className='relative flex-col w-full justify-center'>
                       <input type={passwordVisibie ? "text" : "password"} id='password' className='w-full h-10 border-2 rounded-sm p-2 outline-none focus:border-red-600' />
                       {passwordVisibie ? (<>
-                        <IoEyeOff onClick={() => setPasswordVisible(!passwordVisibie)} className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]' />
+                        <IoEyeOff data-testid="togglePassword" onClick={() => setPasswordVisible(!passwordVisibie)} className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]' />
                       </>) : (<>
-                        <IoEye onClick={() => setPasswordVisible(!passwordVisibie)} className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]' />
+                        <IoEye data-testid="togglePassword" onClick={() => setPasswordVisible(!passwordVisibie)} className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]' />
                       </>)}
                     </div>
                     {error.password && <p className='text-red-600 text-xs'>{error.password}</p>}
