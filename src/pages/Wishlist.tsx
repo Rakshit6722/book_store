@@ -4,6 +4,7 @@ import Footer from '../components/Common/Footer'
 import bookCover from '../assets/images/bookImage.png'
 import BookLongCard from '../components/Common/BookLongCard'
 import Breadcrumbs from '../components/Common/Breadcrumbs'
+import Placeholder from '../components/Common/Placeholder'
 
 
 const orders = [
@@ -24,6 +25,15 @@ const orders = [
 function Wishlist() {
 
     const wishlistLength = orders.length < 10 ? `0${orders.length}` : orders.length
+
+    return (
+        <div>
+            <Header container='home' />
+            <div className='min-h-[83.75vh] max-w-6xl p-5 mx-auto flex flex-col mt-2'>
+                <Placeholder />
+            </div>
+        </div>
+    )
 
     return (
         <div>
