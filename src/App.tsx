@@ -10,6 +10,7 @@ import MyOrders from './pages/MyOrders'
 import Wishlist from './pages/Wishlist'
 import Profile from './pages/Profile'
 import OrderConfirmation from './pages/OrderConfirmation'
+import Cart from './pages/Cart'
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
         <Route path='/myOrder' element={<MyOrders/>}/>
         <Route path='wishlist' element={<Wishlist/>}/>
         <Route path='/orderPlaced' element={<OrderConfirmation/>}/>
+        <Route path='/cart' element={<Cart/>}/>
       </Routes>
     </div>
   )
