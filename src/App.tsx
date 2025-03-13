@@ -9,6 +9,7 @@ import BookPage from './pages/BookPage'
 import MyOrders from './pages/MyOrders'
 import Wishlist from './pages/Wishlist'
 import Profile from './pages/Profile'
+import OrderConfirmation from './pages/OrderConfirmation'
 
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
         <Route path='/home/:id' element={<BookPage/>}/>
         <Route path='/myOrder' element={<MyOrders/>}/>
         <Route path='wishlist' element={<Wishlist/>}/>
+        <Route path='/orderPlaced' element={<OrderConfirmation/>}/>
       </Routes>
     </div>
   )
