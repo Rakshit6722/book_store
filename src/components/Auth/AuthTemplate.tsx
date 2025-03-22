@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
 import loginSignUpImage from '../../assets/images/loginSignupImage.png'
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { IoEyeOff } from "react-icons/io5";
 import { IoEye } from "react-icons/io5";
-import { login } from '../../api/userApi';
+import { login, register } from '../../api/userApi';
+import { toast } from 'react-toastify';
+import { set } from 'react-hook-form';
+
 
 type authTemplateProps = {
   container: string;
 }
 
 function AuthTemplate({ container }: authTemplateProps) {
-  const location = useLocation()
-  
+
+  const navigate = useNavigate()
+
   const [passwordVisible, setPasswordVisible] = React.useState(false)
 
   const [formData, setFormData] = useState({
@@ -52,12 +56,12 @@ function AuthTemplate({ container }: authTemplateProps) {
       password: "",
       mobile: ""
     }
-    
-    if (container === "register") {
+
+    if (container === "register" && !formData.fullName) {
       errorObj.fullName = "Full Name is required"
       isValid = false
     }
-    
+
     if (!formData.email) {
       errorObj.email = "Email is required"
       isValid = false
@@ -65,7 +69,7 @@ function AuthTemplate({ container }: authTemplateProps) {
       errorObj.email = "Please enter a valid email address"
       isValid = false
     }
-    
+
     if (!formData.password) {
       errorObj.password = "Password is required"
       isValid = false
@@ -73,7 +77,7 @@ function AuthTemplate({ container }: authTemplateProps) {
       errorObj.password = "Password must be at least 6 characters"
       isValid = false
     }
-    
+
     if (container === "register" && !formData.mobile) {
       errorObj.mobile = "Mobile is required"
       isValid = false
@@ -81,33 +85,57 @@ function AuthTemplate({ container }: authTemplateProps) {
       errorObj.mobile = "Please enter a valid 10-digit mobile number"
       isValid = false
     }
-    
+
     setError(errorObj)
     return isValid
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
-    
+
     if (container === "login") {
       try {
-        const data = await login({email: formData.email, password: formData.password})
-        console.log(data)
-
-      } catch(err: any) {
+        const data = await login({ email: formData.email, password: formData.password })
+        console.log("response",data)
+        console.log("token",data?.data?.result?.accessToken)
+        if(data?.data?.success){
+          localStorage.setItem('token', data?.data?.result.accessToken)
+          localStorage.setItem("name", formData.email.split("@")[0])
+          toast.success("Login Success")
+          navigate('/home')
+        }
+      } catch (err: any) {
         console.log(err.message)
-        setError({
-          ...error,
-          email: err.message || "Login failed"
-        })
+        toast.error(err.message || "Login Failed")
       }
     } else if (container === "register") {
-      // Add registration logic here
-      console.log("Register with:", formData)
-      // Call register API
+      try {
+        const data = await register({
+          fullName: formData.fullName,
+          email: formData.email,
+          password: formData.password,
+          phone: formData.mobile,
+        }
+        )
+
+        if (data?.data?.result !== null) {
+          toast.success("User Created")
+          navigate('/')
+        } else {
+          toast.error(data?.data?.message)
+        }
+      } catch (err: any) {
+        console.log(err.message)
+      }
     }
+    setFormData({
+      fullName: "",
+      email: "",
+      password: "",
+      mobile: ""
+    })
   }
 
   return (
@@ -146,47 +174,47 @@ function AuthTemplate({ container }: authTemplateProps) {
                 <div className='flex w-full flex-col space-y-4 align-center justify-center px-7 py-3'>
                   <div className='flex flex-col items-center'>
                     <label className='text-xs font-normal self-start' htmlFor='fullName'>Full Name</label>
-                    <input 
-                      type='text' 
-                      id='fullName' 
+                    <input
+                      type='text'
+                      id='fullName'
                       value={formData.fullName}
                       onChange={handleChange}
-                      className='w-full h-9 border-2 rounded-sm p-2 outline-none focus:border-red-600' 
+                      className='w-full h-9 border-2 rounded-sm p-2 outline-none focus:border-red-600'
                     />
                     {error.fullName && <p className='text-red-600 text-xs self-start'>{error.fullName}</p>}
                   </div>
                   <div className='flex flex-col items-center'>
                     <label className='text-xs font-normal self-start' htmlFor='email'>Email Id</label>
-                    <input 
-                      type='email' 
-                      id='email' 
+                    <input
+                      type='email'
+                      id='email'
                       value={formData.email}
                       onChange={handleChange}
-                      className='w-full h-9 border-2 rounded-sm p-2 outline-none focus:border-red-600' 
+                      className='w-full h-9 border-2 rounded-sm p-2 outline-none focus:border-red-600'
                     />
                     {error.email && <p className='text-red-600 text-xs self-start'>{error.email}</p>}
                   </div>
                   <div className='flex flex-col items-center'>
                     <label className='text-xs font-normal self-start' htmlFor='password'>Password</label>
                     <div className='relative flex-col w-full justify-center'>
-                      <input 
-                        type={passwordVisible ? "text" : "password"} 
-                        id='password' 
+                      <input
+                        type={passwordVisible ? "text" : "password"}
+                        id='password'
                         value={formData.password}
                         onChange={handleChange}
-                        className='w-full h-10 border-2 rounded-sm p-2 outline-none focus:border-red-600' 
+                        className='w-full h-10 border-2 rounded-sm p-2 outline-none focus:border-red-600'
                       />
                       {passwordVisible ? (
-                        <IoEyeOff 
-                          data-testid="togglePassword" 
-                          onClick={() => setPasswordVisible(!passwordVisible)} 
-                          className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]' 
+                        <IoEyeOff
+                          data-testid="togglePassword"
+                          onClick={() => setPasswordVisible(!passwordVisible)}
+                          className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]'
                         />
                       ) : (
-                        <IoEye 
-                          data-testid="togglePassword" 
-                          onClick={() => setPasswordVisible(!passwordVisible)} 
-                          className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]' 
+                        <IoEye
+                          data-testid="togglePassword"
+                          onClick={() => setPasswordVisible(!passwordVisible)}
+                          className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]'
                         />
                       )}
                     </div>
@@ -194,12 +222,12 @@ function AuthTemplate({ container }: authTemplateProps) {
                   </div>
                   <div className='flex flex-col items-center'>
                     <label className='text-xs font-normal self-start' htmlFor='mobile'>Mobile Number</label>
-                    <input 
-                      type='tel' 
-                      id='mobile' 
+                    <input
+                      type='tel'
+                      id='mobile'
                       value={formData.mobile}
                       onChange={handleChange}
-                      className='w-full h-9 border-2 rounded-sm p-2 outline-none focus:border-red-600' 
+                      className='w-full h-9 border-2 rounded-sm p-2 outline-none focus:border-red-600'
                     />
                     {error.mobile && <p className='text-red-600 text-xs self-start'>{error.mobile}</p>}
                   </div>
@@ -212,34 +240,34 @@ function AuthTemplate({ container }: authTemplateProps) {
                 <div className='flex w-full flex-col space-y-4 align-center justify-center px-7 py-3'>
                   <div className='flex flex-col items-center'>
                     <label className='text-xs font-normal self-start' htmlFor='email'>Email Id</label>
-                    <input 
-                      onChange={handleChange} 
-                      type='email' 
-                      id='email' 
+                    <input
+                      onChange={handleChange}
+                      type='email'
+                      id='email'
                       value={formData.email}
-                      className='w-full h-9 border-2 rounded-sm p-2 outline-none focus:border-red-600' 
+                      className='w-full h-9 border-2 rounded-sm p-2 outline-none focus:border-red-600'
                     />
                     {error.email && <p className='text-red-600 text-xs self-start'>{error.email}</p>}
                   </div>
                   <div className='flex flex-col items-center'>
                     <label className='text-xs font-normal self-start' htmlFor='password'>Password</label>
                     <div className='relative flex-col w-full justify-center'>
-                      <input 
-                        onChange={handleChange} 
-                        type={passwordVisible ? "text" : "password"} 
-                        id='password' 
+                      <input
+                        onChange={handleChange}
+                        type={passwordVisible ? "text" : "password"}
+                        id='password'
                         value={formData.password}
-                        className='w-full h-10 border-2 rounded-sm p-2 outline-none focus:border-red-600' 
+                        className='w-full h-10 border-2 rounded-sm p-2 outline-none focus:border-red-600'
                       />
                       {passwordVisible ? (
-                        <IoEyeOff 
-                          onClick={() => setPasswordVisible(!passwordVisible)} 
-                          className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]' 
+                        <IoEyeOff
+                          onClick={() => setPasswordVisible(!passwordVisible)}
+                          className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]'
                         />
                       ) : (
-                        <IoEye 
-                          onClick={() => setPasswordVisible(!passwordVisible)} 
-                          className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]' 
+                        <IoEye
+                          onClick={() => setPasswordVisible(!passwordVisible)}
+                          className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]'
                         />
                       )}
                       {error.password && <p className='text-red-600 text-xs self-start'>{error.password}</p>}

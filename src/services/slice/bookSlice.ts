@@ -1,0 +1,32 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+type BookType = {
+    bookName: string;
+    author: string;
+    rating: number;
+    price: number;
+    discountPrice: number;
+    cover?: string;
+    _id: string;
+};
+
+const initialState = {
+    bookList: [] as BookType[],
+    loading: false,
+}
+
+const bookSlice = createSlice({
+    name:"book",
+    initialState,
+    reducers:{
+        setBookList(state, action){
+            state.bookList = action.payload;
+        },
+        setLoading(state, action){
+            state.loading = action.payload;
+        }
+    }
+})
+
+export const { setBookList, setLoading } = bookSlice.actions;
+export default bookSlice.reducer;
