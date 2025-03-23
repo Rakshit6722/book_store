@@ -15,9 +15,10 @@ import bookCover2 from '../../assets/images/BookCover2.png';
 import bookCover3 from '../../assets/images/BookCover3.png';
 import bookCover4 from '../../assets/images/BookCover4.png';
 import bookCover5 from '../../assets/images/BookCover5.png';
-import { addWishlist } from '../../api/bookApi';
+import { addToTheCart, addWishlist, updateCartItem } from '../../api/bookApi';
 import { toast } from 'react-toastify';
 import { setWishList } from '../../services/slice/wishlistSlice';
+import { addToCartReducer, decrementQuantity, incrementQuantity, resetCart } from '../../services/slice/cartSlice';
 
 const images = [bookCover1, bookCover2, bookCover3, bookCover4, bookCover5];
 
@@ -26,7 +27,9 @@ type bookDetail = {
     author?: string,
     price?: number,
     discountPrice?: number,
-    _id?: string
+    _id?: string,
+    quantity?: number,
+    product_id?: string
 };
 
 function BookDetails() {
@@ -34,21 +37,50 @@ function BookDetails() {
     const location = useLocation();
     const bookList = useSelector((state: RootState) => state.bookList.bookList);
     const wishList = useSelector((state: RootState) => state.wishList.wishList);
-    const loading = useSelector((state: RootState) => state.bookList.loading)
+    const cart = useSelector((state: RootState) => state.cart.cart)
 
-    console.log("loading", loading)
-    console.log("wishlist", wishList)
-    console.log("bookList", bookList)
+    console.log("cart", cart)
 
     const [imageActive, setImageActive] = useState(0);
     const [bookDetails, setBookDetails] = useState<bookDetail>(
         bookList.find(book => book._id === location.pathname.split('/')[2]) || {}
     );
+
     const [addToCart, setAddToCart] = useState(false);
     const [cartCount, setCartCount] = useState(1);
 
-    const incrementCart = () => setCartCount(prevCount => prevCount + 1);
-    const decrementCart = () => { if (cartCount > 1) setCartCount(prevCount => prevCount - 1); };
+    useEffect(() => {
+        const bookInCart = cart.find((book: bookDetail) => book?.product_id === bookDetails._id);
+        if (bookInCart) {
+            setAddToCart(true);
+            setCartCount(bookInCart.quantityToBuy);
+        }
+    }, [])
+
+    const incrementCart = async () => {
+
+        const newCount = cartCount + 1;
+        setCartCount(newCount);
+        try {
+            await updateCartItem(bookDetails?._id, newCount);
+            dispatch(incrementQuantity(bookDetails));
+        } catch (err) {
+            console.log("Error in updating cart", err);
+        }
+    }
+
+    const decrementCart = async () => {
+        if (cartCount > 1) {
+            const newCount = cartCount - 1;
+            setCartCount(newCount);
+            try {
+                await updateCartItem(bookDetails._id, newCount);
+                dispatch(decrementQuantity(bookDetails));
+            } catch (err) {
+                console.log("Error in updating cart", err);
+            }
+        };
+    };
 
     const isInWishlist = wishList.find((book: bookDetail) => book._id === bookDetails._id);
 
@@ -65,6 +97,21 @@ function BookDetails() {
             console.log("Error in adding to wishlist", err);
         }
     };
+
+    const addToCartHandler = async () => {
+        try {
+            const response = await addToTheCart(bookDetails._id);
+            // console.log(response)
+            if (response?.data?.success) {
+                toast.success("Item added to cart");
+                setCartCount(1);
+                setAddToCart(true);
+                dispatch(addToCartReducer({...response?.data?.result}));
+            }
+        } catch (err) {
+            console.log("Error in adding to cart", err);
+        }
+    }
 
     return (
         <div className='flex flex-col md:flex-row mt-6'>
@@ -95,7 +142,7 @@ function BookDetails() {
                             </div>
                         </div>
                     ) : (
-                        <button onClick={() => setAddToCart(true)} className='h-10 md:h-12 w-32 sm:w-36 md:w-40 bg-[#A03037] text-white flex items-center justify-center'>ADD TO BAG</button>
+                        <button onClick={addToCartHandler} className='h-10 md:h-12 w-32 sm:w-36 md:w-40 bg-[#A03037] text-white flex items-center justify-center'>ADD TO BAG</button>
                     )}
 
 

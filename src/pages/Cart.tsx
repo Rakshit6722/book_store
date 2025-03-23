@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../components/Common/Header'
 import Footer from '../components/Common/Footer'
 import Breadcrumbs from '../components/Common/Breadcrumbs'
@@ -9,24 +9,23 @@ import { Dropdown, Space } from 'antd';
 import CartSection from '../components/Cart/CartSection'
 import AddressDetails from '../components/Cart/AddressDetails'
 import OrderSummary from '../components/Cart/OrderSummary'
+import { getCartItem } from '../api/bookApi'
+import bookCover1 from '../assets/images/BookCover1.png';
+import bookCover2 from '../assets/images/BookCover2.png';
+import bookCover3 from '../assets/images/BookCover3.png';
+import bookCover4 from '../assets/images/BookCover4.png';
+import bookCover5 from '../assets/images/BookCover5.png';
+import bookCover6 from '../assets/images/BookCover6.png';
+import bookCover7 from '../assets/images/BookCover7.png';
+import bookCover8 from '../assets/images/BookCover8.png';
+import bookCover9 from '../assets/images/BookCover9.png';
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../store'
+import { resetCart } from '../services/slice/cartSlice'
 
-const dummyCartInfo = [
-    {
-        title: "Don't Make Me Think",
-        author: "Steve Krug",
-        price: "1500",
-        quantity: 1,
-        total: 1500,
-        cover: BookImage
-    },
-    {
-        title: "Don't Make Me Think",
-        author: "Steve Krug",
-        price: "1500",
-        quantity: 1,
-        total: 1500,
-        cover: BookImage
-    },
+const bookCover = [
+    bookCover1, bookCover2, bookCover3, bookCover4, bookCover5,
+    bookCover6, bookCover7, bookCover8, bookCover9
 ]
 
 const items: MenuProps['items'] = [
@@ -55,11 +54,34 @@ const items: MenuProps['items'] = [
     },
 ];
 
+
 const Cart = () => {
 
+    const dispatch = useDispatch()
     // const [myCartDetails, setMyCartDetails] = React.useState(true)
     const [addressDetails, setAddressDetails] = React.useState(false)
     const [orderSummary, setOrderSummary] = React.useState(false)
+    const [cartItems, setCartItems] = React.useState<any[]>([])
+
+    const cart = useSelector((state: RootState) => state.cart.cart)
+    console.log("cart", cart)
+
+    useEffect(() => {
+        getCartItems()
+    }, [])
+
+    const getCartItems = async () => {
+        try {
+            const response = await getCartItem()
+            console.log("Cart items", response)
+            if (response?.data?.success) {
+                console.log("Cart items", response?.data?.result)
+                setCartItems(response?.data?.result)
+            }
+        } catch (err) {
+            console.log("Error in getting cart items", err);
+        }
+    }
 
     return (
         <div>
@@ -84,11 +106,23 @@ const Cart = () => {
                         </div>
                         <div>
                             {
-                                dummyCartInfo.map((cart, index) => (
-                                    <div key={index}>
-                                        <CartSection book={cart} />
+
+                                cartItems.length === 0 ? (<>
+                                    <div className='flex flex-col items-center justify-center gap-2'>
+                                        <p className='text-[#878787]'>No items in the cart</p>
                                     </div>
-                                ))
+                                </>) : (
+                                    <>
+                                        {
+                                            cartItems.map((cart, index) => (
+                                                <div key={index}>
+                                                    <CartSection getCartItems={getCartItems} product_id={cart._id} book={{ ...cart.product_id, cover: bookCover[index % bookCover.length] }} />
+                                                </div>
+                                            ))
+                                        }
+                                    </>
+                                )
+
                             }
                         </div>
                         <div className='text-right'>
@@ -113,13 +147,13 @@ const Cart = () => {
                     <div className='p-5 border-2 border-[#DCDCDC] rounded-sm'>
                         {
                             orderSummary ? (<>
-                                {
+                                {/* {
                                     dummyCartInfo.map((cart, index) => (
                                         <div key={index}>
                                             <OrderSummary book={cart} />
                                         </div>
                                     ))
-                                }
+                                } */}
                                 <div className='text-right'>
                                     <button className={` uppercase text-white bg-[#3371B5] rounded-sm text-sm py-2 px-7`}>
                                         Checkout

@@ -1,24 +1,70 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaMinus } from 'react-icons/fa6'
 import { IoAdd } from 'react-icons/io5'
+import { removeCartItem, updateCartItem } from '../../api/bookApi'
+import { decrementQuantity, incrementQuantity, removeFromCart, resetCart } from '../../services/slice/cartSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '../../store'
+import { toast } from 'react-toastify'
 
 type cartSectionProps = {
-    book: any
+    book: any,
+    product_id?: string,
+    getCartItems: any
 }
 
-const CartSection = ({ book }: cartSectionProps) => {
+const CartSection = ({ book, product_id, getCartItems }: cartSectionProps) => {
 
-    const [cartCount, setCartCount] = useState(1)
+    // console.log("book", book)
 
-    const incrementCart = () => {
-        setCartCount(prevCount => prevCount + 1)
+    const dispatch = useDispatch<AppDispatch>()
+
+    const allCartBookDetails = useSelector((state: RootState) => state.cart.cart)
+    console.log("allCartBookDetails", allCartBookDetails)
+
+    const cartBookDetails = useSelector((state: RootState) => state.cart.cart.find((item) => item._id === book._id))
+
+    const [cartCount, setCartCount] = useState<number>(cartBookDetails?.quantityToBuy || 1)
+
+    const incrementCart = async () => {
+        const newCount = cartCount + 1
+        setCartCount(newCount)
+        try{
+            await updateCartItem(book._id, newCount)
+            dispatch(incrementQuantity(book))
+        }catch(err){
+            console.log("Error in updating cart", err)
+        }
     }
 
     const decrementCart = () => {
         if (cartCount > 1) {
-            setCartCount(prevCount => prevCount - 1)
+            const newCount = cartCount - 1
+            setCartCount(newCount)
+            try{
+                updateCartItem(book._id, newCount)
+                dispatch(decrementQuantity(book))
+            }catch(err)
+            {
+                console.log("Error in updating cart", err)
+            }
         }
     }
+
+    const removeItemFromCart = async () => {
+        try{
+            const response = await removeCartItem(product_id)
+            if(response?.data?.success){
+                toast.success("Item removed from cart")
+                getCartItems()
+                dispatch(removeFromCart(book))
+            }
+            console.log(response)
+        }catch(err){
+            console.log("Error in removing from cart", err)
+        }
+    }
+
 
     return (
         <>
@@ -27,11 +73,11 @@ const CartSection = ({ book }: cartSectionProps) => {
                     <img className='' src={book?.cover} alt='book-image' />
                 </div>
                 <div className='flex flex-col items-start gap-1'>
-                    <p className='text-[#0A0102] font-medium'>{book?.title}</p>
+                    <p className='text-[#0A0102] font-medium'>{book?.bookName}</p>
                     <p className='text-xs text-[#9D9D9D] font-medium'>by {book?.author}</p>
                     <div className='flex items-center space-x-2 mt-2 mb-5'>
-                        <p className='font-semibold text-[#373434] text-lg'>Rs. 1500</p>
-                        <p className='text-[#878787] text-xs line-through'>Rs. 2000</p>
+                        <p className='font-semibold text-[#373434] text-lg'>{book?.discountPrice}</p>
+                        <p className='text-[#878787] text-xs line-through'>{book?.price}</p>
                     </div>
 
                     <div className='flex gap-5'>
@@ -58,7 +104,7 @@ const CartSection = ({ book }: cartSectionProps) => {
                         </div>
 
 
-                        <button>
+                        <button onClick={removeItemFromCart} className='text-[#9D9D9D] text-xs font-medium cursor-pointer hover:text-black'>
                             Remove
                         </button>
                     </div>

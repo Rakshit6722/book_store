@@ -9,6 +9,7 @@ type BookType = {
     discountPrice: number;
     cover?: string;
     _id: string;
+    quantity: number;
 };
 
 const initialState = {

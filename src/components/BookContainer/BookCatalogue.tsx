@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBooks } from '../../api/bookApi';
-import { setBookList, setLoading } from '../../services/slice/bookSlice';
+import { resetBookList, setBookList, setLoading } from '../../services/slice/bookSlice';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin, Pagination } from 'antd';
 import Book from './Book';
@@ -27,7 +27,6 @@ const BookCatalogue = () => {
     const bookList = useSelector((state: RootState) => state.bookList.bookList);
     const loading = useSelector((state: RootState) => state.bookList.loading);
 
-
     // Pagination State
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(8); 
@@ -39,6 +38,7 @@ const BookCatalogue = () => {
     const getBooksList = async () => {
         dispatch(setLoading(true));
         const response = await getBooks();
+        console.log("response", response?.data?.result);
         dispatch(setBookList(response?.data?.result || [])); 
         dispatch(setLoading(false));
     };
