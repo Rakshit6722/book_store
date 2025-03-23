@@ -4,6 +4,7 @@ import Footer from '../components/Common/Footer'
 import bookCover from '../assets/images/bookImage.png'
 import BookLongCard from '../components/Common/BookLongCard'
 import Breadcrumbs from '../components/Common/Breadcrumbs'
+import Placeholder from '../components/Common/Placeholder'
 
 
 const orders = [
@@ -22,6 +23,11 @@ const orders = [
 ]
 
 function MyOrders() {
+
+    const token = localStorage.getItem('token');
+
+    if(!token) return <Placeholder/>
+
     return (
         <div>
             <Header container='home' />

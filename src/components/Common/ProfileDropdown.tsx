@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 function ProfileDropdown() {
     const [profileName, setProfileName] = useState<string | null>(null);
-    
+
     useEffect(() => {
         setProfileName(localStorage.getItem('name'));
     }, []);
@@ -21,6 +21,12 @@ function ProfileDropdown() {
                     <button className='text-[#A03037] font-semibold border-[#A03037] border-2 text-sm py-1 px-4 mt-2'>LOGIN/SIGNUP</button>
                 </NavLink>
             </div>
+                <NavLink to={'/myOrder'} className='flex items-center gap-2 text-sm text-[#878787] font-semibold'>
+                    <IoBagOutline /> <p>My Orders</p>
+                </NavLink>
+                <NavLink to={'/wishlist'} className='flex items-center gap-2 text-sm text-[#878787] font-semibold'>
+                    <IoMdHeartEmpty /> <p>My Wishlist</p>
+                </NavLink>
         </div>
     );
 
@@ -36,7 +42,7 @@ function ProfileDropdown() {
             <NavLink to={'/wishlist'} className='flex items-center gap-2 text-sm text-[#878787] font-semibold'>
                 <IoMdHeartEmpty /> <p>My Wishlist</p>
             </NavLink>
-            <button  className='text-[#A03037] font-semibold border-[#A03037] border-2 text-sm py-1 px-9 mt-2'>Logout</button>
+            <button className='text-[#A03037] font-semibold border-[#A03037] border-2 text-sm py-1 px-9 mt-2'>Logout</button>
         </div>
     );
 

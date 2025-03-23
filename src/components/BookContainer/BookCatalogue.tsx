@@ -52,7 +52,7 @@ const BookCatalogue = () => {
 
     if (loading) {
         return (
-            <div className='flex justify-center items-center h-[80vh]'>
+            <div className='flex justify-center items-center h-[75vh]'>
                 <Spin indicator={<LoadingOutlined style={{ fontSize: 48, color: "#A03037" }} spin />} />
             </div>
         );

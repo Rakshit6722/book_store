@@ -26,14 +26,19 @@ function Wishlist() {
 
     const wishlistLength = orders.length < 10 ? `0${orders.length}` : orders.length
 
-    return (
-        <div>
-            <Header container='home' />
-            <div className='min-h-[83.75vh] max-w-6xl p-5 mx-auto flex flex-col mt-2'>
-                <Placeholder />
+    const token = localStorage.getItem('token');
+
+    if (!token){
+        return (
+            <div>
+                <Header container='home' />
+                <div className='min-h-[83.75vh] max-w-6xl p-5 mx-auto flex flex-col mt-2'>
+                    <Placeholder />
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
+
 
     return (
         <div>

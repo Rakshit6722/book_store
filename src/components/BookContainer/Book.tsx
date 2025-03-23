@@ -25,7 +25,7 @@ const Book = ({ book }: bookProps) => {
                 <p className='text-[#878787] text-xs font-normal mb-1'>by {book.author}</p>
                 <div className='flex text-xs items-center gap-1'>
                     <div className='flex h-5 px-1 items-center justify-center text-white text-xs bg-[#388E3C] rounded-sm'>
-                        <span>{book.rating}</span>
+                        <span>{4.5}</span>
                         <IoStar className='text-white text-xs ml-0.5' />
                     </div>
                     <p className='text-[#878787]'>(20)</p>
