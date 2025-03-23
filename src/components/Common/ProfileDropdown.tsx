@@ -5,12 +5,34 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { Popover } from 'antd';
 import { NavLink } from 'react-router-dom';
 
-function ProfileDropdown() {
+function ProfileDropdown({logout}:{logout: any}) {
     const [profileName, setProfileName] = useState<string | null>(null);
+    const [open, setOpen] = useState(false);
+
 
     useEffect(() => {
+     
         setProfileName(localStorage.getItem('name'));
+        
+        const handleStorageChange = () => {
+            setProfileName(localStorage.getItem('name'));
+        };
+        
+
+        window.addEventListener('storage', handleStorageChange);
+        
+
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
     }, []);
+
+
+    const handleLogout = () => {
+        logout();
+        setProfileName(null);
+        setOpen(false); 
+    };
 
     const guestContent = (
         <div className='flex flex-col items-start gap-5 p-3'>
@@ -42,12 +64,18 @@ function ProfileDropdown() {
             <NavLink to={'/wishlist'} className='flex items-center gap-2 text-sm text-[#878787] font-semibold'>
                 <IoMdHeartEmpty /> <p>My Wishlist</p>
             </NavLink>
-            <button className='text-[#A03037] font-semibold border-[#A03037] border-2 text-sm py-1 px-9 mt-2'>Logout</button>
+            <button onClick={handleLogout} className='text-[#A03037] font-semibold border-[#A03037] border-2 text-sm py-1 px-9 mt-2'>Logout</button>
         </div>
     );
 
     return (
-        <Popover placement="bottom" content={profileName ? loggedInContent : guestContent} trigger='click'>
+        <Popover 
+            placement="bottom" 
+            content={profileName ? loggedInContent : guestContent} 
+            trigger='click'
+            open={open}
+            onOpenChange={setOpen}
+        >
             <div className='flex flex-col items-center justify-center cursor-pointer'>
                 <div className='flex items-center justify-center h-6'>
                     <FaRegUser className='text-white text-xl' />

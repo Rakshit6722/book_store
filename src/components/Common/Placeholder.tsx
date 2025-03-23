@@ -1,8 +1,12 @@
 import React from 'react'
 import placeholderImg from '../../assets/images/Page-1.svg'
 import Header from './Header'
+import { useNavigate } from 'react-router-dom'
 
 function Placeholder() {
+
+  const navigate = useNavigate()
+
   return (
     <>
     <Header container='home' />
@@ -15,7 +19,7 @@ function Placeholder() {
             <img src={placeholderImg} alt='placeholder-image'/>
         </div>
         <div>
-            <button className='text-[#A03037] font-normal border-[#A03037] border-2 text-xs py-2 px-6 mt-2'>LOGIN/SIGNUP</button>
+            <button onClick={() => navigate("/login")} className='text-[#A03037] font-normal border-[#A03037] border-2 text-xs py-2 px-6 mt-2'>LOGIN/SIGNUP</button>
         </div>
     </div>
     </>

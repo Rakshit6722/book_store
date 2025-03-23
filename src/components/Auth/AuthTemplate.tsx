@@ -104,7 +104,7 @@ function AuthTemplate({ container }: authTemplateProps) {
           localStorage.setItem('token', data?.data?.result.accessToken)
           localStorage.setItem("name", formData.email.split("@")[0])
           toast.success("Login Success")
-          navigate('/home')
+          navigate('/')
         }
       } catch (err: any) {
         console.log(err.message)

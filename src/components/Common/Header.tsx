@@ -5,9 +5,13 @@ import { FaRegUser } from "react-icons/fa6";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { IoSearch } from 'react-icons/io5';
 import ProfileDropdown from './ProfileDropdown';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { persistor, RootState } from '../../store';
+import { Navigate, NavLink, useNavigate } from 'react-router-dom';
+import { resetCart } from '../../services/slice/cartSlice';
+import { removeCartItem, removeWishlist } from '../../api/bookApi';
+import { resetWishList } from '../../services/slice/wishlistSlice';
+import { toast } from 'react-toastify';
 
 type headerProps = {
     container?: string
@@ -15,8 +19,37 @@ type headerProps = {
 
 const Header = ({ container }: headerProps) => {
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const { cart } = useSelector((state: RootState) => state.cart);
+    const { wishList } = useSelector((state: RootState) => state.wishList);
     // console.log("cart", cart);
+
+
+    const removeEverythingFromCart = () => {
+        cart.map(async (book) => {
+            await removeCartItem(book._id)
+        })
+        dispatch(resetCart())
+    }
+
+    const removeEverythingFromWishList = () => {
+        wishList.map(async (book) => {
+            await removeWishlist(book._id)
+        })
+        dispatch(resetWishList())
+    }
+
+    const logout = () => {
+        removeEverythingFromCart()
+        removeEverythingFromWishList()
+        localStorage.removeItem('token')
+        localStorage.removeItem('name')
+        persistor.purge()
+        navigate("/")
+        toast.success("Logged out successfully")
+    }
 
     return (
         <div className='w-full bg-[#A03037]'>
@@ -48,7 +81,7 @@ const Header = ({ container }: headerProps) => {
                                 </div>
                                 <p className='text-white hidden md:block text-xs mt-1'>Search</p>
                             </div>
-                            <ProfileDropdown />
+                            <ProfileDropdown logout={logout} />
                             <div className='flex flex-col items-center justify-center cursor-pointer relative'>
                                 <NavLink to={"/cart"}>
                                     <div className='flex items-center justify-center h-6 relative'>

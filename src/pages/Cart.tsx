@@ -24,6 +24,7 @@ import { RootState } from '../store'
 import { resetCart } from '../services/slice/cartSlice'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import Placeholder from '../components/Common/Placeholder'
 
 const bookCover = [
     bookCover1, bookCover2, bookCover3, bookCover4, bookCover5,
@@ -68,6 +69,8 @@ const Cart = () => {
     const cart = useSelector((state: RootState) => state.cart.cart)
     console.log("cart", cart)
 
+    const token = localStorage.getItem('token')
+
     const orderSummaryDetails = cart.map((book, index) => {
         return {
             product_id: book.product_id || '',
@@ -83,7 +86,7 @@ const Cart = () => {
         getCartItems()
     }, [])
 
-    const removeEverythingFromCart =  () => {
+    const removeEverythingFromCart = () => {
         cart.map(async (book) => {
             await removeCartItem(book._id)
         })
@@ -91,16 +94,16 @@ const Cart = () => {
         dispatch(resetCart())
     }
     const handleCheckout = async () => {
-        try{
+        try {
             const response = await addOrder(orderSummaryDetails)
-            if(response?.data?.success){
+            if (response?.data?.success) {
                 console.log("Order placed successfully", response)
                 toast.success("Order placed successfully")
                 navigate('/orderPlaced')
                 // dispatch(resetCart())
                 removeEverythingFromCart()
             }
-        }catch(err){
+        } catch (err) {
             console.log("Error in checkout", err)
         }
     }
@@ -118,6 +121,14 @@ const Cart = () => {
         }
     }
 
+    if (!token) {
+        return (
+            <>
+                <Placeholder />
+            </>
+        )
+    }
+
     return (
         <div>
             <Header container='home' />
@@ -128,7 +139,7 @@ const Cart = () => {
                         <div className='flex justify-between items-center w-full'>
                             <p className='font-medium text-lg'>My Cart</p>
                             {/* dummy locaiton dropdown */}
-                            <div className='cursor-pointer border-2 border-[#DCDCDC] py-1.5 px-7 flex '>
+                            {/* <div className='cursor-pointer border-2 border-[#DCDCDC] py-1.5 px-7 flex '>
                                 <Dropdown menu={{ items }} trigger={['click']}>
                                     <a onClick={(e) => e.preventDefault()}>
                                         <Space>
@@ -137,7 +148,7 @@ const Cart = () => {
                                         </Space>
                                     </a>
                                 </Dropdown>
-                            </div>
+                            </div> */}
                         </div>
                         <div>
                             {

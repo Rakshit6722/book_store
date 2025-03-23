@@ -41,10 +41,10 @@ function Wishlist() {
     if (!token) {
         return (
             <div>
-                <Header container='home' />
-                <div className='min-h-[83.75vh] max-w-6xl p-5 mx-auto flex flex-col mt-2'>
+                {/* <Header container='home' /> */}
+        
                     <Placeholder />
-                </div>
+                
             </div>
         );
     }
