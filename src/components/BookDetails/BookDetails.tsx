@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import bookImage from '../../assets/images/bookImage.png'
-import bookImage2 from '../../assets/images/bookImage2.png'
+import React, { useEffect, useState } from 'react';
+import bookImage from '../../assets/images/bookImage.png';
+import bookImage2 from '../../assets/images/bookImage2.png';
 import { FaHeart } from "react-icons/fa";
 import { IoStar } from "react-icons/io5";
 import FeedbackForm from './FeedbackForm';
@@ -8,13 +8,16 @@ import Feedback from './Feedback';
 import { FaMinus } from "react-icons/fa6";
 import { IoAdd } from "react-icons/io5";
 import { useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store';
 import bookCover1 from '../../assets/images/BookCover1.png';
 import bookCover2 from '../../assets/images/BookCover2.png';
 import bookCover3 from '../../assets/images/BookCover3.png';
 import bookCover4 from '../../assets/images/BookCover4.png';
 import bookCover5 from '../../assets/images/BookCover5.png';
+import { addWishlist } from '../../api/bookApi';
+import { toast } from 'react-toastify';
+import { setWishList } from '../../services/slice/wishlistSlice';
 
 const images = [bookCover1, bookCover2, bookCover3, bookCover4, bookCover5];
 
@@ -23,19 +26,45 @@ type bookDetail = {
     author?: string,
     price?: number,
     discountPrice?: number,
-}
+    _id?: string
+};
 
 function BookDetails() {
+    const dispatch = useDispatch<AppDispatch>();
     const location = useLocation();
     const bookList = useSelector((state: RootState) => state.bookList.bookList);
+    const wishList = useSelector((state: RootState) => state.wishList.wishList);
+    const loading = useSelector((state: RootState) => state.bookList.loading)
+
+    console.log("loading", loading)
+    console.log("wishlist", wishList)
+    console.log("bookList", bookList)
 
     const [imageActive, setImageActive] = useState(0);
-    const [bookDetails, setBookDetails] = useState<bookDetail>(bookList.find(book => book._id === location.pathname.split('/')[2]) || {});
+    const [bookDetails, setBookDetails] = useState<bookDetail>(
+        bookList.find(book => book._id === location.pathname.split('/')[2]) || {}
+    );
     const [addToCart, setAddToCart] = useState(false);
     const [cartCount, setCartCount] = useState(1);
 
     const incrementCart = () => setCartCount(prevCount => prevCount + 1);
     const decrementCart = () => { if (cartCount > 1) setCartCount(prevCount => prevCount - 1); };
+
+    const isInWishlist = wishList.find((book: bookDetail) => book._id === bookDetails._id);
+
+    const addToWishlistHandler = async () => {
+        if (isInWishlist) return;
+
+        try {
+            const response = await addWishlist(bookDetails?._id);
+            if (response?.data?.message === "Item added to wish list") {
+                toast.success("Item added to wishlist");
+                dispatch(setWishList(bookDetails));
+            }
+        } catch (err) {
+            console.log("Error in adding to wishlist", err);
+        }
+    };
 
     return (
         <div className='flex flex-col md:flex-row mt-6'>
@@ -68,10 +97,19 @@ function BookDetails() {
                     ) : (
                         <button onClick={() => setAddToCart(true)} className='h-10 md:h-12 w-32 sm:w-36 md:w-40 bg-[#A03037] text-white flex items-center justify-center'>ADD TO BAG</button>
                     )}
-                    <div className='h-10 md:h-12 flex select-none items-center justify-center gap-1 sm:gap-2 md:gap-3 w-32 sm:w-36 md:w-40 bg-[#373434] cursor-pointer text-white'>
-                        <FaHeart className='text-white' />
-                        <p className='text-xs sm:text-sm md:text-base'>WISHLIST</p>
-                    </div>
+
+
+                    {isInWishlist ? (
+                        <div className='h-10 md:h-12 flex select-none items-center justify-center gap-1 sm:gap-2 md:gap-3 w-32 sm:w-36 md:w-40 bg-[#F0F0F0] text-[#A03037] border border-[#A03037] cursor-default'>
+                            <FaHeart className='text-[#A03037]' />
+                            <p className='text-xs sm:text-sm md:text-base font-medium'>WISHLISTED</p>
+                        </div>
+                    ) : (
+                        <div onClick={addToWishlistHandler} className='h-10 md:h-12 flex select-none items-center justify-center gap-1 sm:gap-2 md:gap-3 w-32 sm:w-36 md:w-40 bg-[#373434] cursor-pointer text-white'>
+                            <FaHeart className='text-white' />
+                            <p className='text-xs sm:text-sm md:text-base'>WISHLIST</p>
+                        </div>
+                    )}
                 </div>
             </div>
             <div className='md:w-[60%] flex flex-col gap-6 ml-6'>
@@ -89,14 +127,6 @@ function BookDetails() {
                         <p className='font-semibold text-[#373434] text-3xl'>Rs. {bookDetails?.discountPrice}</p>
                         <p className='text-[#878787] text-sm line-through'>{bookDetails?.price}</p>
                     </div>
-                </div>
-                <div className='flex mt-2 flex-col gap-2 border-b-2 border-[#E0E0E0] w-full'>
-                    <p className='text-[#878787] text-sm'>Book Details</p>
-                    <p className='text-[#373434] text-xs mb-10'>Lorem Ipsum is simply dummy te
-                        xt of the printing and typesetting industryLorem Ipsum is simply dummy text
-                        of the printing and typesetting industryLorem Ipsum is simply dummy text of
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industrythe printing and typesetting industryLorem Ipsum is
-                        simply dummy text of the printing and typesetting industry...</p>
                 </div>
                 <div>
                     <FeedbackForm />

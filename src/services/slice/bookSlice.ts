@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 type BookType = {
     bookName: string;
     author: string;
@@ -16,17 +17,20 @@ const initialState = {
 }
 
 const bookSlice = createSlice({
-    name:"book",
+    name: "bookList",
     initialState,
-    reducers:{
-        setBookList(state, action){
+    reducers: {
+        setBookList(state, action) {
             state.bookList = action.payload;
         },
-        setLoading(state, action){
+        resetBookList(state) {
+            state.bookList = [];
+        },
+        setLoading(state, action) {
             state.loading = action.payload;
-        }
+        },
     }
 })
 
-export const { setBookList, setLoading } = bookSlice.actions;
+export const { setBookList, resetBookList, setLoading } = bookSlice.actions;
 export default bookSlice.reducer;

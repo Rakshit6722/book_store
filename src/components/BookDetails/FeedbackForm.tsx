@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { IoStarOutline, IoStarSharp } from "react-icons/io5";
 
 function FeedbackForm() {
-    const [rating, setRating] = useState(0); // Stores the selected rating
-    const [hover, setHover] = useState(0); // Stores the hovered rating
+    const [rating, setRating] = useState(0); 
+    const [hover, setHover] = useState(0);
 
     return (
         <div className="flex flex-col gap-4">
