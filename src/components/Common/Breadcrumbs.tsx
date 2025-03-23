@@ -15,7 +15,7 @@ const Breadcrumbs = ({ container }: BreadcrumbsProps) => {
       <Breadcrumb
         items={[
           {
-            title: <a href='/home'>Home</a>,
+            title: <a href='/'>Home</a>,
           },
           {
             title: container === 'bookPage' ? <a href='/book'><p className='text-black font-semibold'>Book</p></a> :

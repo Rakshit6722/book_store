@@ -176,8 +176,8 @@ function BookDetails() {
                     </div>
                 </div>
                 <div>
-                    <FeedbackForm />
-                    <Feedback />
+                    <FeedbackForm bookDetails={bookDetails}/>
+                    <Feedback bookDetails={bookDetails}/>
                 </div>
             </div>
         </div>

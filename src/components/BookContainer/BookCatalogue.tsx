@@ -64,7 +64,7 @@ const BookCatalogue = () => {
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
                 {paginatedBooks.length > 0 ? (
                     paginatedBooks.map((book, index) => (
-                        <NavLink to={`/home/${book._id}`} key={book._id}>
+                        <NavLink to={`/book/${book._id}`} key={book._id}>
                             <div className='flex justify-center'>
                                 <Book book={{ ...book, cover: bookCovers[(startIndex + index) % bookCovers.length] }} />
                             </div>

@@ -22,10 +22,12 @@ const Header = ({ container }: headerProps) => {
         <div className='w-full bg-[#A03037]'>
             <div className='h-[60px] max-w-6xl flex justify-between mx-auto items-center px-7'>
                 <div className='flex items-center space-x-8'>
-                    <div className='flex items-center space-x-2'>
-                        <img className='w-8' src={logo} alt='logo-img'></img>
-                        <p className='text-white text-xl'>Bookstore</p>
-                    </div>
+                    <NavLink to={"/"}>
+                        <div className='flex items-center space-x-2'>
+                            <img className='w-8' src={logo} alt='logo-img'></img>
+                            <p className='text-white text-xl'>Bookstore</p>
+                        </div>
+                    </NavLink>
                     {
                         container === 'home' && (
                             <div className='hidden sm:flex items-center space-x-1 bg-white rounded-[3px]'>

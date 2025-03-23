@@ -1,9 +1,26 @@
 import React, { useState } from "react";
 import { IoStarOutline, IoStarSharp } from "react-icons/io5";
+import { addBookReview } from "../../api/bookApi";
 
-function FeedbackForm() {
-    const [rating, setRating] = useState(0); 
+type FeedbackFormProps = {
+    bookDetails: any;
+};
+
+function FeedbackForm({ bookDetails }: FeedbackFormProps) {
+    const [comment, setComment] = useState("");
+    const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
+
+    console.log("bookDetails", bookDetails);
+
+    const submitReviewHandler = async () => {
+        try {
+            const response = await addBookReview(bookDetails?._id, comment, rating)
+            console.log(response)
+        } catch (err) {
+            console.log("Error in submitting review", err)
+        }
+    }
 
     return (
         <div className="flex flex-col gap-4">
@@ -14,9 +31,9 @@ function FeedbackForm() {
                     {[1, 2, 3, 4, 5].map((star) => (
                         <span
                             key={star}
-                            onMouseEnter={() => setHover(star)} 
-                            onMouseLeave={() => setHover(0)} 
-                            onClick={() => setRating(star)} 
+                            onMouseEnter={() => setHover(star)}
+                            onMouseLeave={() => setHover(0)}
+                            onClick={() => setRating(star)}
                             className="cursor-pointer text-xl"
                         >
                             {star <= (hover || rating) ? (
@@ -30,9 +47,11 @@ function FeedbackForm() {
                 <textarea
                     className="w-full h-24 p-2 placeholder:text-sm"
                     placeholder="Write your review"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
                 ></textarea>
                 <div className="flex justify-end">
-                    <button className="bg-[#3371B5] w-24 py-1 rounded-sm text-white text-sm">
+                    <button onClick={submitReviewHandler} className="bg-[#3371B5] w-24 py-1 rounded-sm text-white text-sm">
                         Submit
                     </button>
                 </div>

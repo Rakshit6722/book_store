@@ -11,18 +11,19 @@ import Wishlist from './pages/Wishlist'
 import Profile from './pages/Profile'
 import OrderConfirmation from './pages/OrderConfirmation'
 import Cart from './pages/Cart'
+import AuthRoutes from './pages/AuthRoutes'
 
 
 const App = () => {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/register' element={<AuthRoutes><Register/></AuthRoutes>}/>
         <Route path='/forgotPassword' element={<ForgotPassword/>}/>
-        <Route path='/home' element={<Home/>}/>
+        <Route path='/login' element={<AuthRoutes><Login/></AuthRoutes>}/>
         <Route path='/profile' element={<Profile/>}/>
-        <Route path='/home/:id' element={<BookPage/>}/>
+        <Route path='/book/:id' element={<BookPage/>}/>
         <Route path='/myOrder' element={<MyOrders/>}/>
         <Route path='wishlist' element={<Wishlist/>}/>
         <Route path='/orderPlaced' element={<OrderConfirmation/>}/>

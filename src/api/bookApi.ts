@@ -1,3 +1,4 @@
+import Book from "../components/BookContainer/Book"
 import { apiConnector } from "../services/apiConnector"
 
 const BASE_URL = "https://bookstore.incubation.bridgelabz.com/bookstore_user"
@@ -107,3 +108,27 @@ export const addOrder = async (allOrders: {
         throw error;
     }
 };
+
+
+export const getBookReviews = async (bookId: string | undefined) => {
+    try{
+        const token = localStorage.getItem('token')
+        const response = await apiConnector("GET", `${BASE_URL}/get/feedback/${bookId}`,null,{"x-access-token": token})
+        return response
+    }catch(err){
+        console.error("Error while getting reviews", err)
+        throw err
+    }
+}
+
+
+export const addBookReview = async (bookId: string | undefined, comment: string, rating: number) => {
+    try{
+        const token = localStorage.getItem('token')
+        const response = await apiConnector("POST", `${BASE_URL}/add/feedback/${bookId}`, {comment, rating}, { "x-access-token": token })
+        return response
+    }catch(err){
+        console.error("Error while adding review", err)
+        throw err
+    }
+}
