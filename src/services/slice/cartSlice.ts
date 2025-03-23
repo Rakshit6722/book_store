@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 
 type CartType = {
-    bookName: string;
+    name: string;
     author: string;
     price: number;
     discountPrice: number;
@@ -34,22 +34,23 @@ const cartSlice = createSlice({
         },
         removeFromCart(state, action) {
             console.log("action", action)
-            const book = action.payload;
-            const index = state.cart.findIndex((item) => item._id === book._id);
+            // const book = action.payload;
+            const index = state.cart.findIndex((item) => item._id === action.payload);
             if (index !== -1) {
                 state.cart.splice(index, 1);
             }
         },
         incrementQuantity(state, action) {
-            const book = action.payload;
-            const index = state.cart.findIndex((item) => item._id === book._id);
+            // const book = action.payload;
+            const index = state.cart.findIndex((item) => item._id === action.payload);
             if (index !== -1) {
                 state.cart[index].quantityToBuy += 1;
             }
         },
         decrementQuantity(state, action) {
-            const book = action.payload;
-            const index = state.cart.findIndex((item) => item._id === book._id);
+            // const book = action.payload;
+            const index = state.cart.findIndex((item) => item._id === action.payload);
+            console.log("index", index)
             if (index !== -1) {
                 state.cart[index].quantityToBuy -= 1;
             }

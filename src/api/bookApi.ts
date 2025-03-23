@@ -88,3 +88,22 @@ export const updateCartItem = async (bookId: string | undefined, quantity: numbe
         throw err
     }
 }
+
+export const addOrder = async (allOrders: {
+    product_id: string,
+    product_name: string,
+    product_quantity: number,
+    product_price: number
+}[]) => {
+    try {
+        const token = localStorage.getItem('token');
+
+        const response = await apiConnector("POST", `${BASE_URL}/add/order`, {orders: allOrders}, { "x-access-token": token });
+        return response
+        // console.log("RESPONSE FROM API CALL: ", response);
+        // return response.status;
+    } catch (error) {
+        console.error("Updating Cart Items Failed", error);
+        throw error;
+    }
+};

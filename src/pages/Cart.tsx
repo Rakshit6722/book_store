@@ -9,7 +9,7 @@ import { Dropdown, Space } from 'antd';
 import CartSection from '../components/Cart/CartSection'
 import AddressDetails from '../components/Cart/AddressDetails'
 import OrderSummary from '../components/Cart/OrderSummary'
-import { getCartItem } from '../api/bookApi'
+import { addOrder, getCartItem, removeCartItem } from '../api/bookApi'
 import bookCover1 from '../assets/images/BookCover1.png';
 import bookCover2 from '../assets/images/BookCover2.png';
 import bookCover3 from '../assets/images/BookCover3.png';
@@ -22,6 +22,8 @@ import bookCover9 from '../assets/images/BookCover9.png';
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../store'
 import { resetCart } from '../services/slice/cartSlice'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const bookCover = [
     bookCover1, bookCover2, bookCover3, bookCover4, bookCover5,
@@ -56,7 +58,7 @@ const items: MenuProps['items'] = [
 
 
 const Cart = () => {
-
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     // const [myCartDetails, setMyCartDetails] = React.useState(true)
     const [addressDetails, setAddressDetails] = React.useState(false)
@@ -66,9 +68,42 @@ const Cart = () => {
     const cart = useSelector((state: RootState) => state.cart.cart)
     console.log("cart", cart)
 
+    const orderSummaryDetails = cart.map((book, index) => {
+        return {
+            product_id: book.product_id || '',
+            product_name: book?.name || 'Unknown Name',
+            product_quantity: Number(book.quantityToBuy),
+            product_price: Number(book.price),
+        }
+    })
+
+    console.log("orderSummaryDetails", orderSummaryDetails)
+
     useEffect(() => {
         getCartItems()
     }, [])
+
+    const removeEverythingFromCart =  () => {
+        cart.map(async (book) => {
+            await removeCartItem(book._id)
+        })
+
+        dispatch(resetCart())
+    }
+    const handleCheckout = async () => {
+        try{
+            const response = await addOrder(orderSummaryDetails)
+            if(response?.data?.success){
+                console.log("Order placed successfully", response)
+                toast.success("Order placed successfully")
+                navigate('/orderPlaced')
+                // dispatch(resetCart())
+                removeEverythingFromCart()
+            }
+        }catch(err){
+            console.log("Error in checkout", err)
+        }
+    }
 
     const getCartItems = async () => {
         try {
@@ -147,15 +182,15 @@ const Cart = () => {
                     <div className='p-5 border-2 border-[#DCDCDC] rounded-sm'>
                         {
                             orderSummary ? (<>
-                                {/* {
-                                    dummyCartInfo.map((cart, index) => (
+                                {
+                                    cart.map((cart, index) => (
                                         <div key={index}>
-                                            <OrderSummary book={cart} />
+                                            <OrderSummary book={{ ...cart, cover: bookCover[index % bookCover.length] }} />
                                         </div>
                                     ))
-                                } */}
+                                }
                                 <div className='text-right'>
-                                    <button className={` uppercase text-white bg-[#3371B5] rounded-sm text-sm py-2 px-7`}>
+                                    <button onClick={handleCheckout} className={` uppercase text-white bg-[#3371B5] rounded-sm text-sm py-2 px-7`}>
                                         Checkout
                                     </button>
                                 </div>

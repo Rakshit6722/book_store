@@ -23,6 +23,7 @@ type addressDetailsProps = {
 const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => {
     const [selectedAddress, setSelectedAddress] = useState(0);
     const [addressEdit, setAddressEdit] = useState<boolean>(false);
+    const [name, setName] = useState<string>(localStorage.getItem('name') || '');
     const [showNewAddressForm, setShowNewAddressForm] = useState<boolean>(false);
     const [addressData, setAddressData] = useState({
         address: dummyAddressList[selectedAddress]?.address,
@@ -102,6 +103,8 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
                     <div className='flex flex-col gap-1 w-1/2'>
                         <label className='text-xs font-medium'>Full Name</label>
                         <input
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             type='text'
                             className='h-10 border-2 rounded-sm p-2 outline-none focus:border-red-600 text-[#878787] w-full'
                         />
@@ -115,7 +118,7 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
                     </div>
                 </div>
 
-                {/* new form */}
+
                 {showNewAddressForm && (
                     <div className='w-full p-4 rounded-md'>
                         <div className='flex w-full justify-between'>

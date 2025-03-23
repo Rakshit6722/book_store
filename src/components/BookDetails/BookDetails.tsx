@@ -106,7 +106,7 @@ function BookDetails() {
                 toast.success("Item added to cart");
                 setCartCount(1);
                 setAddToCart(true);
-                dispatch(addToCartReducer({...response?.data?.result}));
+                dispatch(addToCartReducer({...response?.data?.result, name: bookDetails?.bookName, price: bookDetails?.price, discountPrice: bookDetails?.discountPrice, author: bookDetails?.author}));  
             }
         } catch (err) {
             console.log("Error in adding to cart", err);

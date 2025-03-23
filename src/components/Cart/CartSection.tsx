@@ -31,7 +31,7 @@ const CartSection = ({ book, product_id, getCartItems }: cartSectionProps) => {
         setCartCount(newCount)
         try{
             await updateCartItem(book._id, newCount)
-            dispatch(incrementQuantity(book))
+            dispatch(incrementQuantity(product_id))
         }catch(err){
             console.log("Error in updating cart", err)
         }
@@ -43,7 +43,7 @@ const CartSection = ({ book, product_id, getCartItems }: cartSectionProps) => {
             setCartCount(newCount)
             try{
                 updateCartItem(book._id, newCount)
-                dispatch(decrementQuantity(book))
+                dispatch(decrementQuantity(product_id))
             }catch(err)
             {
                 console.log("Error in updating cart", err)
@@ -57,7 +57,7 @@ const CartSection = ({ book, product_id, getCartItems }: cartSectionProps) => {
             if(response?.data?.success){
                 toast.success("Item removed from cart")
                 getCartItems()
-                dispatch(removeFromCart(book))
+                dispatch(removeFromCart(product_id))
             }
             console.log(response)
         }catch(err){
