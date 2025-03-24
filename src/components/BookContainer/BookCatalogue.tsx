@@ -44,7 +44,7 @@ const BookCatalogue = () => {
         dispatch(setLoading(false));
     };
 
-    // **Sorting Logic**
+
     const sortedBooks = useMemo(() => {
         let sortedArray = [...bookList];
     
