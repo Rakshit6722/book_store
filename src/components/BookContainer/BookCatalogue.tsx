@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBooks } from '../../api/bookApi';
@@ -16,6 +16,7 @@ import bookCover7 from '../../assets/images/BookCover7.png';
 import bookCover8 from '../../assets/images/BookCover8.png';
 import bookCover9 from '../../assets/images/BookCover9.png';
 import { AppDispatch, RootState } from '../../store';
+import { SearchContext } from '../../context/SearchProvider';
 
 const bookCovers: string[] = [
     bookCover1, bookCover2, bookCover3, bookCover4, bookCover5, 
@@ -24,6 +25,9 @@ const bookCovers: string[] = [
 
 const BookCatalogue = () => {
     const dispatch = useDispatch<AppDispatch>();
+
+    const {searchQuery}: any = useContext(SearchContext)
+
     const bookList = useSelector((state: RootState) => state.bookList.bookList);
     const loading = useSelector((state: RootState) => state.bookList.loading);
 
@@ -46,6 +50,11 @@ const BookCatalogue = () => {
     const startIndex = (currentPage - 1) * pageSize;
     const paginatedBooks = bookList.slice(startIndex, startIndex + pageSize);
 
+    const filteredNotes = useMemo(() => {
+        if (!searchQuery) return paginatedBooks;
+        return paginatedBooks.filter((book) => book.bookName.toLowerCase().includes(searchQuery.toLowerCase()));
+    },[searchQuery, bookList])
+
     const handlePageChange = (page: number, pageSize?: number) => {
         setCurrentPage(page);
         if (pageSize) setPageSize(pageSize);
@@ -60,10 +69,10 @@ const BookCatalogue = () => {
     }
 
     return (
-        <div className='flex flex-col'>
+        <div className='flex flex-col justify-between min-h-[80vh]'>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-                {paginatedBooks.length > 0 ? (
-                    paginatedBooks.map((book, index) => (
+                {filteredNotes.length > 0 ? (
+                    filteredNotes.map((book, index) => (
                         <NavLink to={`/book/${book._id}`} key={book._id}>
                             <div className='flex justify-center'>
                                 <Book book={{ ...book, cover: bookCovers[(startIndex + index) % bookCovers.length] }} />

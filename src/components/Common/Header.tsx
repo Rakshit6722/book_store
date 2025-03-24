@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import logo from '../../assets/images/education.svg'
 import { IoIosSearch } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa6";
@@ -12,6 +12,7 @@ import { resetCart } from '../../services/slice/cartSlice';
 import { removeCartItem, removeWishlist } from '../../api/bookApi';
 import { resetWishList } from '../../services/slice/wishlistSlice';
 import { toast } from 'react-toastify';
+import { SearchContext } from '../../context/SearchProvider';
 
 type headerProps = {
     container?: string
@@ -22,10 +23,10 @@ const Header = ({ container }: headerProps) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    const {searchQuery, setSearchQuery}: any = useContext(SearchContext)
+
     const { cart } = useSelector((state: RootState) => state.cart);
     const { wishList } = useSelector((state: RootState) => state.wishList);
-    // console.log("cart", cart);
-
 
     const removeEverythingFromCart = () => {
         cart.map(async (book) => {
@@ -67,7 +68,7 @@ const Header = ({ container }: headerProps) => {
                                 <div className='flex items-center justify-center w-10 h-10'>
                                     <IoIosSearch className='text-[#9D9D9D] text-xl' />
                                 </div>
-                                <input type='text' placeholder='Search...' className='md:w-[250px] lg:w-[450px] h-10 bg-transparent outline-none' />
+                                <input onChange={(e) => setSearchQuery(e.target.value)} value={searchQuery} type='text' placeholder='Search...' className='md:w-[250px] lg:w-[450px] h-10 bg-transparent outline-none' />
                             </div>
                         )
                     }
