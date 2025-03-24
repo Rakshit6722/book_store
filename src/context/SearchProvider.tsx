@@ -9,10 +9,13 @@ type searchContextProps = {
 const SearchProvider = ({children}:searchContextProps) => {
 
     const [searchQuery, setSearchQuery] = useState("")
+    const [sortQuery, setSortQuery] = useState("")
 
     const value = {
         searchQuery,
-        setSearchQuery
+        setSearchQuery,
+        sortQuery,
+        setSortQuery
     }
 
     return (
