@@ -59,9 +59,14 @@ function BookDetails() {
 
     const incrementCart = async () => {
 
+        if(cartCount >= (bookDetails?.quantity ?? 0)){
+            toast.error("Quantity exceeds the available quantity")
+            return;
+        }
         const newCount = cartCount + 1;
         setCartCount(newCount);
         try {
+            console.log("newCount", newCount)
             await updateCartItem(bookDetails?._id, newCount);
             dispatch(incrementQuantity(bookDetails));
         } catch (err) {

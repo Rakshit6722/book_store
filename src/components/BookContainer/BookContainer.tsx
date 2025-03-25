@@ -13,7 +13,7 @@ const BookContainer = () => {
     
     const [sortOrder, setSortOrder] = useState<string>('relevance');
 
-    // Sorting Options
+    
     const items: MenuProps['items'] = [
         {
             label: 'Sort by relevance',

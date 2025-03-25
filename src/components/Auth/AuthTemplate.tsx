@@ -122,7 +122,7 @@ function AuthTemplate({ container }: authTemplateProps) {
 
         if (data?.data?.result !== null) {
           toast.success("User Created")
-          navigate('/')
+          navigate('/login')
         } else {
           toast.error(data?.data?.message)
         }
