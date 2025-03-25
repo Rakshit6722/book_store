@@ -4,9 +4,10 @@ import { addBookReview } from "../../api/bookApi";
 
 type FeedbackFormProps = {
     bookDetails: any;
+    getReviews?: any;
 };
 
-function FeedbackForm({ bookDetails }: FeedbackFormProps) {
+function FeedbackForm({ bookDetails, getReviews }: FeedbackFormProps) {
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
@@ -16,7 +17,11 @@ function FeedbackForm({ bookDetails }: FeedbackFormProps) {
     const submitReviewHandler = async () => {
         try {
             const response = await addBookReview(bookDetails?._id, comment, rating)
-            console.log(response)
+            if(response?.data?.success){
+                getReviews()
+                setComment("")
+                setRating(0)
+            }
         } catch (err) {
             console.log("Error in submitting review", err)
         }

@@ -2,24 +2,18 @@ import React, { useEffect } from "react";
 import { IoStarOutline, IoStarSharp } from "react-icons/io5";
 import { getBookReviews } from "../../api/bookApi";
 
-function Feedback({bookDetails}: {bookDetails: any}) {
-  const [reviews, setReviews] = React.useState([]);
+type FeedbackProps = {
+  bookDetails: any,
+  reviews: string[],
+  setReviews: any,
+  getReviews: any
+}
 
+function Feedback({bookDetails, reviews, setReviews, getReviews}: FeedbackProps) {
+ 
   useEffect(() => {
     getReviews();
   }, [bookDetails?._id]);
-
-  const getReviews = async () => {
-    try {
-      const response = await getBookReviews(bookDetails?._id);
-      if(response?.data?.success){
-        console.log(response?.data?.result);
-        setReviews(response?.data?.result);
-      }
-    } catch (err) {
-      console.log("Error in getting reviews", err);
-    }
-  }
 
   return (
     <div className="mt-4">

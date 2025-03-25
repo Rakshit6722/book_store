@@ -15,7 +15,7 @@ import bookCover2 from '../../assets/images/BookCover2.png';
 import bookCover3 from '../../assets/images/BookCover3.png';
 import bookCover4 from '../../assets/images/BookCover4.png';
 import bookCover5 from '../../assets/images/BookCover5.png';
-import { addToTheCart, addWishlist, updateCartItem } from '../../api/bookApi';
+import { addToTheCart, addWishlist, getBookReviews, updateCartItem } from '../../api/bookApi';
 import { toast } from 'react-toastify';
 import { setWishList } from '../../services/slice/wishlistSlice';
 import { addToCartReducer, decrementQuantity, incrementQuantity, resetCart } from '../../services/slice/cartSlice';
@@ -45,7 +45,7 @@ function BookDetails() {
     const [bookDetails, setBookDetails] = useState<bookDetail>(
         bookList.find(book => book._id === location.pathname.split('/')[2]) || {}
     );
-
+      const [reviews, setReviews] = React.useState([]);
     const [addToCart, setAddToCart] = useState(false);
     const [cartCount, setCartCount] = useState(1);
 
@@ -56,6 +56,20 @@ function BookDetails() {
             setCartCount(bookInCart.quantityToBuy);
         }
     }, [])
+
+
+    const getReviews = async () => {
+        try {
+          const response = await getBookReviews(bookDetails?._id);
+          if(response?.data?.success){
+            console.log(response?.data?.result);
+            setReviews(response?.data?.result.reverse());
+          }
+        } catch (err) {
+          console.log("Error in getting reviews", err);
+        }
+      }
+    
 
     const incrementCart = async () => {
 
@@ -181,8 +195,8 @@ function BookDetails() {
                     </div>
                 </div>
                 <div>
-                    <FeedbackForm bookDetails={bookDetails}/>
-                    <Feedback bookDetails={bookDetails}/>
+                    <FeedbackForm getReviews={getReviews} bookDetails={bookDetails}/>
+                    <Feedback reviews={reviews} setReviews={setReviews} getReviews={getReviews} bookDetails={bookDetails}/>
                 </div>
             </div>
         </div>
