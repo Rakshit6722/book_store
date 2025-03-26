@@ -25,6 +25,7 @@ import { resetCart } from '../services/slice/cartSlice'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Placeholder from '../components/Common/Placeholder'
+import { resetPrevOrdersList, setPrevOrdersList } from '../services/slice/orderSlice'
 
 const bookCover = [
     bookCover1, bookCover2, bookCover3, bookCover4, bookCover5,
@@ -66,10 +67,23 @@ const Cart = () => {
     const [orderSummary, setOrderSummary] = React.useState(false)
     const [cartItems, setCartItems] = React.useState<any[]>([])
 
+    const prevOrderList = useSelector((state: RootState) => state.prevOrderList.prevOrdersList)
     const cart = useSelector((state: RootState) => state.cart.cart)
     console.log("cart", cart)
 
     const token = localStorage.getItem('token')
+
+    const previousOrderList = cart.map((book) => {
+        return {
+            _id: book.product_id ?? '',
+            bookName: book?.name ?? 'Unknown Name',
+            product_quantity: Number(book.quantityToBuy),
+            discountPrice: Number(book.discountPrice),
+            price: Number(book.price),
+            product_date: book?.updatedAt,
+            author: book?.author,
+        }
+    })
 
     const orderSummaryDetails = cart.map((book, index) => {
         return {
@@ -84,10 +98,20 @@ const Cart = () => {
 
     useEffect(() => {
         getCartItems()
+        // dispatch(resetPrevOrdersList())
     }, [])
 
+    useEffect(() => {
+        console.log("Updated prevOrderList", prevOrderList);
+    }, [prevOrderList]);
+
+    const addToPrevOrderList = () => {
+        dispatch(setPrevOrdersList(previousOrderList))
+        console.log("prevOrderList", prevOrderList)
+    }
+
     const removeEverythingFromCart = () => {
-        cart.map(async (book) => {
+        cart.forEach(async (book) => {
             await removeCartItem(book._id)
         })
 
@@ -101,6 +125,7 @@ const Cart = () => {
                 toast.success("Order placed successfully")
                 navigate('/orderPlaced')
                 // dispatch(resetCart())
+                addToPrevOrderList()
                 removeEverythingFromCart()
             }
         } catch (err) {
@@ -123,9 +148,7 @@ const Cart = () => {
 
     if (!token) {
         return (
-            <>
                 <Placeholder />
-            </>
         )
     }
 
@@ -153,15 +176,15 @@ const Cart = () => {
                         <div>
                             {
 
-                                cartItems.length === 0 ? (<>
+                                cartItems.length === 0 ? (
                                     <div className='flex flex-col items-center justify-center gap-2'>
                                         <p className='text-[#878787]'>No items in the cart</p>
                                     </div>
-                                </>) : (
+                               ) : (
                                     <>
                                         {
                                             cartItems.map((cart, index) => (
-                                                <div key={index}>
+                                                <div key={cart._id}>
                                                     <CartSection getCartItems={getCartItems} product_id={cart._id} book={{ ...cart.product_id, cover: bookCover[index % bookCover.length] }} />
                                                 </div>
                                             ))
@@ -172,7 +195,7 @@ const Cart = () => {
                             }
                         </div>
                         <div className='text-right'>
-                            <button onClick={() => setAddressDetails(true)} className={` ${addressDetails ? "hidden" : ""} uppercase text-white bg-[#3371B5] rounded-sm text-sm py-2 px-7`}>
+                            <button disabled={cartItems.length === 0} onClick={() => setAddressDetails(true)} className={` ${addressDetails ? "hidden" : ""} uppercase text-white ${cartItems.length === 0 ? "bg-gray-500" : "bg-[#3371B5]"} ${cartItems.length === 0 ? "hidden" : ""}  rounded-sm text-sm py-2 px-7`}>
                                 Place Order
                             </button>
                         </div>

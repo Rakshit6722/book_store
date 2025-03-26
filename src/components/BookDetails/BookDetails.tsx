@@ -15,9 +15,9 @@ import bookCover2 from '../../assets/images/BookCover2.png';
 import bookCover3 from '../../assets/images/BookCover3.png';
 import bookCover4 from '../../assets/images/BookCover4.png';
 import bookCover5 from '../../assets/images/BookCover5.png';
-import { addToTheCart, addWishlist, getBookReviews, updateCartItem } from '../../api/bookApi';
+import { addToTheCart, addWishlist, getBookReviews, removeWishlist, updateCartItem } from '../../api/bookApi';
 import { toast } from 'react-toastify';
-import { setWishList } from '../../services/slice/wishlistSlice';
+import { removeFromWishlist, setWishList } from '../../services/slice/wishlistSlice';
 import { addToCartReducer, decrementQuantity, incrementQuantity, resetCart } from '../../services/slice/cartSlice';
 
 const images = [bookCover1, bookCover2, bookCover3, bookCover4, bookCover5];
@@ -25,6 +25,7 @@ const images = [bookCover1, bookCover2, bookCover3, bookCover4, bookCover5];
 type bookDetail = {
     bookName?: string,
     author?: string,
+    description?: string,
     price?: number,
     discountPrice?: number,
     _id?: string,
@@ -42,14 +43,16 @@ function BookDetails() {
     console.log("cart", cart)
 
     const [imageActive, setImageActive] = useState(0);
+    const[isWishlisted, setIsWishlisted] = useState(false)
     const [bookDetails, setBookDetails] = useState<bookDetail>(
         bookList.find(book => book._id === location.pathname.split('/')[2]) || {}
     );
-      const [reviews, setReviews] = React.useState([]);
+    const [reviews, setReviews] = React.useState([]);
     const [addToCart, setAddToCart] = useState(false);
     const [cartCount, setCartCount] = useState(1);
 
     useEffect(() => {
+        isBookInWishlist()
         const bookInCart = cart.find((book: bookDetail) => book?.product_id === bookDetails._id);
         if (bookInCart) {
             setAddToCart(true);
@@ -60,20 +63,20 @@ function BookDetails() {
 
     const getReviews = async () => {
         try {
-          const response = await getBookReviews(bookDetails?._id);
-          if(response?.data?.success){
-            console.log(response?.data?.result);
-            setReviews(response?.data?.result.reverse());
-          }
+            const response = await getBookReviews(bookDetails?._id);
+            if (response?.data?.success) {
+                console.log(response?.data?.result);
+                setReviews(response?.data?.result.reverse());
+            }
         } catch (err) {
-          console.log("Error in getting reviews", err);
+            console.log("Error in getting reviews", err);
         }
-      }
-    
+    }
+
 
     const incrementCart = async () => {
 
-        if(cartCount >= (bookDetails?.quantity ?? 0)){
+        if (cartCount >= (bookDetails?.quantity ?? 0)) {
             toast.error("Quantity exceeds the available quantity")
             return;
         }
@@ -101,21 +104,47 @@ function BookDetails() {
         };
     };
 
-    const isInWishlist = wishList.find((book: bookDetail) => book._id === bookDetails._id);
+    const isBookInWishlist = () => {
+        const isInWishlist = wishList.find((book: bookDetail) => book._id === bookDetails._id);
+        if(isInWishlist){
+            setIsWishlisted(true)
+            return true
+        }
+        return false
+    }
 
     const addToWishlistHandler = async () => {
-        if (isInWishlist) return;
+        if(!localStorage.getItem("token")){
+            toast.error("Login first")
+            return
+        }
+        if (isBookInWishlist()) return;
 
         try {
             const response = await addWishlist(bookDetails?._id);
             if (response?.data?.message === "Item added to wish list") {
                 toast.success("Item added to wishlist");
+                setIsWishlisted(true)
                 dispatch(setWishList(bookDetails));
             }
         } catch (err) {
             console.log("Error in adding to wishlist", err);
         }
     };
+
+    const removeFromWishlistHandler =  async () => {
+
+        try{
+            const response = await removeWishlist(bookDetails?._id)
+            if(response?.data?.success){
+                toast.success("Removed from wishlist")
+                setIsWishlisted(false)
+                dispatch(removeFromWishlist(bookDetails))
+            }
+        }catch(err: any){
+            console.log(err.message)
+        }
+    }
 
     const addToCartHandler = async () => {
         try {
@@ -125,7 +154,7 @@ function BookDetails() {
                 toast.success("Item added to cart");
                 setCartCount(1);
                 setAddToCart(true);
-                dispatch(addToCartReducer({...response?.data?.result, name: bookDetails?.bookName, price: bookDetails?.price, discountPrice: bookDetails?.discountPrice, author: bookDetails?.author}));  
+                dispatch(addToCartReducer({ ...response?.data?.result, name: bookDetails?.bookName, price: bookDetails?.price, discountPrice: bookDetails?.discountPrice, author: bookDetails?.author }));
             }
         } catch (err) {
             console.log("Error in adding to cart", err);
@@ -165,8 +194,8 @@ function BookDetails() {
                     )}
 
 
-                    {isInWishlist ? (
-                        <div className='h-10 md:h-12 flex select-none items-center justify-center gap-1 sm:gap-2 md:gap-3 w-32 sm:w-36 md:w-40 bg-[#F0F0F0] text-[#A03037] border border-[#A03037] cursor-default'>
+                    {isWishlisted ? (
+                        <div onClick={removeFromWishlistHandler} className='h-10 md:h-12 flex select-none items-center justify-center gap-1 sm:gap-2 md:gap-3 w-32 sm:w-36 md:w-40 bg-[#F0F0F0] text-[#A03037] border border-[#A03037] cursor-default'>
                             <FaHeart className='text-[#A03037]' />
                             <p className='text-xs sm:text-sm md:text-base font-medium'>WISHLISTED</p>
                         </div>
@@ -181,7 +210,11 @@ function BookDetails() {
             <div className='md:w-[60%] flex flex-col gap-6 ml-6'>
                 <div className='flex select-none flex-col gap-1 border-b-2 border-[#E0E0E0] w-full'>
                     <p className='text-3xl text-[#373434]'>{bookDetails?.bookName}</p>
-                    <p className='text-[#878787] text-lg'>{bookDetails?.author}</p>
+                    <p className='text-[#878787] text-sm'>by {bookDetails?.author}</p>
+                    <div className='text-sm border-t-2 border-b-2 mb-5 mt-5'>
+                        <p className='mt-5'>Book Details</p>
+                        <p className='text-[#878787] text-sm mb-5'>{bookDetails?.description}</p>
+                    </div>
                     <div className='flex text-xs items-center gap-2'>
                         <div className='flex h-5 px-2 items-center justify-center text-white text-xs bg-[#388E3C] rounded-sm'>
                             <span>4.5</span>
@@ -195,8 +228,8 @@ function BookDetails() {
                     </div>
                 </div>
                 <div>
-                    <FeedbackForm getReviews={getReviews} bookDetails={bookDetails}/>
-                    <Feedback reviews={reviews} setReviews={setReviews} getReviews={getReviews} bookDetails={bookDetails}/>
+                    <FeedbackForm getReviews={getReviews} bookDetails={bookDetails} />
+                    <Feedback reviews={reviews} setReviews={setReviews} getReviews={getReviews} bookDetails={bookDetails} />
                 </div>
             </div>
         </div>

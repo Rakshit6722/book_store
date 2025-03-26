@@ -25,9 +25,9 @@ const OrderConfirmation = () => {
     return (
         <div>
             <Header container='home'/>
-            <div className='max-w-6xl min-h-[84.85vh] mx-auto p-8 flex flex-col gap-10 items-center'>
-                <img src={orderPlacedImage} alt='Order Placed' className='mx-auto w-[25%] object-cover' />
-                <p className='text-center text-lg text-[#333232] w-1/3 font-medium'>
+            <div className='max-w-6xl min-h-[88vh] md:min-h-[84.85vh] mx-auto p-8 flex flex-col gap-10 items-center'>
+                <img src={orderPlacedImage} alt='Order Placed' className='mx-auto w-[65%] md:w-[25%] object-cover' />
+                <p className='text-center text-lg text-[#333232] md:w-1/3 font-medium'>
                     Hurray!!! Your order is confirmed. <br/>
                     The order ID is <strong>#{orderId}</strong>. <br/>
                     Save the order ID for further communication.

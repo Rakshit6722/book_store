@@ -10,7 +10,8 @@ type CartType = {
     _id: string;
     quantity: number;
     quantityToBuy: number;
-    product_id?: string; 
+    product_id?: string;
+    updatedAt?: string | number
 }
 
 const initialState = {
