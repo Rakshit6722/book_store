@@ -1,7 +1,6 @@
-import Book from "../components/BookContainer/Book"
 import { apiConnector } from "../services/apiConnector"
 
-const BASE_URL = "https://bookstore.incubation.bridgelabz.com/bookstore_user"
+const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export const getBooks = async () => {
     try{
@@ -101,8 +100,6 @@ export const addOrder = async (allOrders: {
 
         const response = await apiConnector("POST", `${BASE_URL}/add/order`, {orders: allOrders}, { "x-access-token": token });
         return response
-        // console.log("RESPONSE FROM API CALL: ", response);
-        // return response.status;
     } catch (error) {
         console.error("Updating Cart Items Failed", error);
         throw error;
