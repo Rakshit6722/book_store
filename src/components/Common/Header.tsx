@@ -29,14 +29,14 @@ const Header = ({ container }: headerProps) => {
     const { wishList } = useSelector((state: RootState) => state.wishList);
 
     const removeEverythingFromCart = () => {
-        cart.map(async (book) => {
+        cart.forEach(async (book) => {
             await removeCartItem(book._id)
         })
         dispatch(resetCart())
     }
 
     const removeEverythingFromWishList = () => {
-        wishList.map(async (book) => {
+        wishList.forEach(async (book) => {
             await removeWishlist(book._id)
         })
         dispatch(resetWishList())
