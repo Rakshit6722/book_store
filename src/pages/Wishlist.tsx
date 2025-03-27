@@ -61,7 +61,7 @@ function Wishlist() {
                     {
                         wishList.map((order, index) => {
                             return (
-                                <div key={index}>
+                                <div key={order.product_id}>
                                     <BookLongCard 
                                         book={{ ...order.product_id, cover: bookCovers[index % bookCovers.length] }} 
                                         container='wishlist' 

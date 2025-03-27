@@ -1,4 +1,3 @@
-import React from 'react'
 import Header from '../components/Common/Header'
 import Footer from '../components/Common/Footer'
 import ProfileEditForm from '../components/Profile/ProfileEditForm'

@@ -3,8 +3,8 @@ import { IoStarOutline, IoStarSharp } from "react-icons/io5";
 import { addBookReview } from "../../api/bookApi";
 
 type FeedbackFormProps = {
-    bookDetails: any;
-    getReviews?: any;
+    readonly bookDetails: any;
+    readonly getReviews?: any;
 };
 
 function FeedbackForm({ bookDetails, getReviews }: FeedbackFormProps) {
@@ -34,7 +34,7 @@ function FeedbackForm({ bookDetails, getReviews }: FeedbackFormProps) {
                 <p className="text-xs font-semibold">Overall rating</p>
                 <div className="flex gap-2">
                     {[1, 2, 3, 4, 5].map((star) => (
-                        <span
+                        <button
                             key={star}
                             onMouseEnter={() => setHover(star)}
                             onMouseLeave={() => setHover(0)}
@@ -46,7 +46,7 @@ function FeedbackForm({ bookDetails, getReviews }: FeedbackFormProps) {
                             ) : (
                                 <IoStarOutline className="text-[#707070]" />
                             )}
-                        </span>
+                        </button>
                     ))}
                 </div>
                 <textarea

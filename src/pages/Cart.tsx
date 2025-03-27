@@ -2,10 +2,6 @@ import React, { useEffect } from 'react'
 import Header from '../components/Common/Header'
 import Footer from '../components/Common/Footer'
 import Breadcrumbs from '../components/Common/Breadcrumbs'
-import BookImage from '../assets/images/bookImage.png'
-import { DownOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Dropdown, Space } from 'antd';
 import CartSection from '../components/Cart/CartSection'
 import AddressDetails from '../components/Cart/AddressDetails'
 import OrderSummary from '../components/Cart/OrderSummary'
@@ -25,44 +21,18 @@ import { resetCart } from '../services/slice/cartSlice'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Placeholder from '../components/Common/Placeholder'
-import { resetPrevOrdersList, setPrevOrdersList } from '../services/slice/orderSlice'
+import { setPrevOrdersList } from '../services/slice/orderSlice'
 
 const bookCover = [
     bookCover1, bookCover2, bookCover3, bookCover4, bookCover5,
     bookCover6, bookCover7, bookCover8, bookCover9
 ]
 
-const items: MenuProps['items'] = [
-    {
-        label: (
-            <a href="https://www.antgroup.com" target="_blank" rel="noopener noreferrer">
-                1st menu item
-            </a>
-        ),
-        key: '0',
-    },
-    {
-        label: (
-            <a href="https://www.aliyun.com" target="_blank" rel="noopener noreferrer">
-                2nd menu item
-            </a>
-        ),
-        key: '1',
-    },
-    {
-        type: 'divider',
-    },
-    {
-        label: '3rd menu item',
-        key: '3',
-    },
-];
-
 
 const Cart = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    // const [myCartDetails, setMyCartDetails] = React.useState(true)
+
     const [addressDetails, setAddressDetails] = React.useState(false)
     const [orderSummary, setOrderSummary] = React.useState(false)
     const [cartItems, setCartItems] = React.useState<any[]>([])
@@ -85,10 +55,10 @@ const Cart = () => {
         }
     })
 
-    const orderSummaryDetails = cart.map((book, index) => {
+    const orderSummaryDetails = cart.map((book) => {
         return {
-            product_id: book.product_id || '',
-            product_name: book?.name || 'Unknown Name',
+            product_id: book.product_id ?? '',
+            product_name: book?.name ?? 'Unknown Name',
             product_quantity: Number(book.quantityToBuy),
             product_price: Number(book.price),
         }
@@ -203,13 +173,13 @@ const Cart = () => {
 
                     <div className='p-5 border-2 border-[#DCDCDC] rounded-sm'>
                         {
-                            addressDetails ? (<>
+                            addressDetails ? (
                                 <AddressDetails orderSummary={orderSummary} setOrderSummary={setOrderSummary} />
-                            </>) : (<>
+                            ) : (
                                 <div className=''>
                                     <p>Address Details</p>
                                 </div>
-                            </>)
+                            )
                         }
                     </div>
 
@@ -218,7 +188,7 @@ const Cart = () => {
                             orderSummary ? (<>
                                 {
                                     cart.map((cart, index) => (
-                                        <div key={index}>
+                                        <div key={cart._id}>
                                             <OrderSummary book={{ ...cart, cover: bookCover[index % bookCover.length] }} />
                                         </div>
                                     ))
@@ -228,11 +198,11 @@ const Cart = () => {
                                         Checkout
                                     </button>
                                 </div>
-                            </>) : (<>
+                            </>) : (
                                 <div className=''>
                                     <p>Order Summary</p>
                                 </div>
-                            </>)
+                            )
                         }
                     </div>
                 </div>

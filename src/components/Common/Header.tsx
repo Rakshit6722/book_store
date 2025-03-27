@@ -1,13 +1,12 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import logo from '../../assets/images/education.svg'
 import { IoIosSearch } from "react-icons/io";
-import { FaRegUser } from "react-icons/fa6";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { IoSearch } from 'react-icons/io5';
 import ProfileDropdown from './ProfileDropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { persistor, RootState } from '../../store';
-import { Navigate, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { resetCart } from '../../services/slice/cartSlice';
 import { removeCartItem, removeWishlist } from '../../api/bookApi';
 import { resetWishList } from '../../services/slice/wishlistSlice';

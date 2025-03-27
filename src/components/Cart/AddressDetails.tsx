@@ -20,10 +20,10 @@ type addressDetailsProps = {
     setOrderSummary: any,
 }
 
-const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => {
+const AddressDetails = ({ orderSummary, setOrderSummary }: addressDetailsProps) => {
     const [selectedAddress, setSelectedAddress] = useState(0);
     const [addressEdit, setAddressEdit] = useState<boolean>(false);
-    const [name, setName] = useState<string>(localStorage.getItem('name') || '');
+    const [name, setName] = useState<string>(localStorage.getItem('name') ?? '');
     const [showNewAddressForm, setShowNewAddressForm] = useState<boolean>(false);
     const [addressData, setAddressData] = useState({
         address: dummyAddressList[selectedAddress]?.address,
@@ -90,7 +90,7 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
         <div className='w-full p-4'>
             <div className='flex justify-between items-center text-lg font-medium mb-4'>
                 <p>Customer Details</p>
-                <button 
+                <button
                     className='text-xs text-[#A03037] border-2 py-2 px-4 border-[#A03037]'
                     onClick={handleAddNewAddress}
                 >
@@ -101,8 +101,9 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
             <div className='flex flex-col gap-4'>
                 <div className='w-[80%] flex gap-4 mt-2'>
                     <div className='flex flex-col gap-1 w-1/2'>
-                        <label className='text-xs font-medium'>Full Name</label>
+                        <label htmlFor='fullName' className='text-xs font-medium'>Full Name</label>
                         <input
+                            id='fullName'
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             type='text'
@@ -110,8 +111,9 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
                         />
                     </div>
                     <div className='flex flex-col gap-1 w-1/2'>
-                        <label className='text-xs font-medium'>Mobile Number</label>
+                        <label htmlFor='mobileNumber' className='text-xs font-medium'>Mobile Number</label>
                         <input
+                            id='mobileNumber'
                             type='text'
                             className='h-10 border-2 rounded-sm p-2 outline-none focus:border-red-600 text-[#878787] w-full'
                         />
@@ -124,15 +126,15 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
                         <div className='flex w-full justify-between'>
                             <div className='flex items-center gap-4'>
                                 <p className='text-lg font-semibold'>New Address</p>
-                                <p
+                                <button
                                     onClick={() => setShowNewAddressForm(false)}
                                     className='text-xs font-semibold text-[#A03037] cursor-pointer'
                                 >
                                     Cancel
-                                </p>
+                                </button>
                             </div>
                             <div>
-                                <button 
+                                <button
                                     className='text-xs font-normal bg-[#3371B5] text-white rounded-sm h-7 px-8'
                                     onClick={handleSaveNewAddress}
                                 >
@@ -142,7 +144,7 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
                         </div>
                         <form className='w-full mt-3'>
                             <div className='flex flex-col gap-2 mb-3'>
-                                <label className='text-xs font-semibold'>Address</label>
+                                <label htmlFor='address' className='text-xs font-semibold'>Address</label>
                                 <textarea
                                     onChange={handleNewAddressChange}
                                     id='address'
@@ -152,7 +154,7 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
                             </div>
                             <div className='flex w-full gap-3 mb-3'>
                                 <div className='flex flex-col gap-2 w-1/2'>
-                                    <label className='text-xs font-semibold'>city/town</label>
+                                    <label htmlFor='city' className='text-xs font-semibold'>city/town</label>
                                     <input
                                         onChange={handleNewAddressChange}
                                         id='city'
@@ -162,7 +164,7 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
                                     />
                                 </div>
                                 <div className='flex flex-col gap-2 w-1/2'>
-                                    <label className='text-xs font-semibold'>State</label>
+                                    <label htmlFor='state' className='text-xs font-semibold'>State</label>
                                     <input
                                         onChange={handleNewAddressChange}
                                         id='state'
@@ -216,7 +218,7 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
 
                 {/* Existing Address List */}
                 {dummyAddressList.map((item, index) => (
-                    <div key={index} className='flex items-start gap-2 p-2 rounded-md'>
+                    <div key={item.type} className='flex items-start gap-2 p-2 rounded-md'>
                         <input
                             type='radio'
                             name='address'
@@ -230,12 +232,12 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
                                     <div className='flex w-full justify-between'>
                                         <div className='flex items-center gap-4'>
                                             <p className='text-lg font-semibold'>{index + 1}. {item.type}</p>
-                                            <p
+                                            <button
                                                 onClick={() => setAddressEdit(!addressEdit)}
                                                 className='text-xs font-semibold text-[#A03037] cursor-pointer'
                                             >
                                                 {addressEdit ? "Cancel" : "Edit"}
-                                            </p>
+                                            </button>
                                         </div>
                                         {addressEdit && (
                                             <div>
@@ -247,7 +249,7 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
                                     </div>
                                     <form className='w-full mt-3'>
                                         <div className='flex flex-col gap-2 mb-3'>
-                                            <label className='text-xs font-semibold'>Address</label>
+                                            <label htmlFor='address' className='text-xs font-semibold'>Address</label>
                                             <textarea
                                                 onChange={handleChange}
                                                 disabled={!addressEdit}
@@ -258,7 +260,7 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
                                         </div>
                                         <div className='flex w-full gap-3 mb-3'>
                                             <div className='flex flex-col gap-2 w-1/2'>
-                                                <label className='text-xs font-semibold'>city/town</label>
+                                                <label htmlFor='city' className='text-xs font-semibold'>city/town</label>
                                                 <input
                                                     onChange={handleChange}
                                                     disabled={!addressEdit}
@@ -269,7 +271,7 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
                                                 />
                                             </div>
                                             <div className='flex flex-col gap-2 w-1/2'>
-                                                <label className='text-xs font-semibold'>State</label>
+                                                <label htmlFor='state' className='text-xs font-semibold'>State</label>
                                                 <input
                                                     onChange={handleChange}
                                                     disabled={!addressEdit}
@@ -331,8 +333,8 @@ const AddressDetails = ({orderSummary, setOrderSummary}:addressDetailsProps) => 
                 ))}
 
                 <div className="flex justify-end mt-4">
-                    <button 
-                        onClick={() => setOrderSummary(true)} 
+                    <button
+                        onClick={() => setOrderSummary(true)}
                         className={`${orderSummary ? "hidden" : ""} uppercase text-white bg-[#3371B5] rounded-sm text-sm py-2 px-5 w-32`}
                     >
                         Continue

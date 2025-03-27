@@ -38,6 +38,12 @@ const BookContainer = () => {
         setSortQuery(sortKey); 
     };
 
+    const getSortLabel = (sortOrder: string) => {
+        if (sortOrder === 'highToLow') return 'Price: High to Low';
+        if (sortOrder === 'lowToHigh') return 'Price: Low to High';
+        return 'Sort by relevance';
+    };
+
     return (
         <div className='max-w-6xl mx-auto p-4 md:p-8'>
             <div className='flex justify-between items-center mb-6'>
@@ -47,18 +53,14 @@ const BookContainer = () => {
                 </div>
                 <div className='cursor-pointer border-2 border-black-600 w-40 flex items-center justify-center py-1 px-2'>
                     <Dropdown menu={{ items }} trigger={['click']}>
-                        <a onClick={(e) => e.preventDefault()}>
+                        <button onClick={(e) => e.preventDefault()}>
                             <Space className='flex justify-between items-center w-full'>
                                 <p className='text-xs font-semibold'>
-                                    {sortOrder === 'highToLow'
-                                        ? 'Price: High to Low'
-                                        : sortOrder === 'lowToHigh'
-                                        ? 'Price: Low to High'
-                                        : 'Sort by relevance'}
+                                    {getSortLabel(sortOrder)}
                                 </p>
                                 <DownOutlined />
                             </Space>
-                        </a>
+                        </button>
                     </Dropdown>
                 </div>
             </div>

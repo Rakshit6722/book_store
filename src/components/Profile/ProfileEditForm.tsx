@@ -25,9 +25,9 @@ function ProfileEditForm() {
             <div className='flex flex-col md:flex-row gap-4 md:gap-0'>
                 <div className='flex items-center w-full md:w-[66%] gap-4'>
                     <p className='text-lg font-semibold'>Personal Details</p>
-                    <p onClick={() =>{
+                    <button onClick={() =>{
                         editPersonalDetails ? setEditPersonalDetails(false) : setEditPersonalDetails(true)
-                    }} className='text-xs font-semibold text-[#A03037] cursor-pointer'>{editPersonalDetails ? "Cancel" : "Edit"}</p>
+                    }} className='text-xs font-semibold text-[#A03037] cursor-pointer'>{editPersonalDetails ? "Cancel" : "Edit"}</button>
                 </div>
                 {
                     editPersonalDetails && (

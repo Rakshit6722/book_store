@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import loginSignUpImage from '../../assets/images/loginSignupImage.png'
 import { NavLink, useNavigate } from 'react-router-dom';
-import { IoEyeOff } from "react-icons/io5";
-import { IoEye } from "react-icons/io5";
+import { IoEyeOff, IoEye } from "react-icons/io5";
 import { login, register } from '../../api/userApi';
 import { toast } from 'react-toastify';
 
 type authTemplateProps = {
-  container: string;
+  readonly container: string;
 }
 
 function AuthTemplate({ container }: authTemplateProps) {

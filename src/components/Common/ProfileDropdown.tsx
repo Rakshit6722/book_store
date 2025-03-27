@@ -5,7 +5,7 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { Popover } from 'antd';
 import { NavLink } from 'react-router-dom';
 
-function ProfileDropdown({logout}:{logout: any}) {
+function ProfileDropdown({logout}:{readonly logout: any}) {
     const [profileName, setProfileName] = useState<string | null>(null);
     const [open, setOpen] = useState(false);
 

@@ -1,4 +1,3 @@
-import Book from "../components/BookContainer/Book"
 import { apiConnector } from "../services/apiConnector"
 
 const BASE_URL = "https://bookstore.incubation.bridgelabz.com/bookstore_user"
@@ -8,7 +7,8 @@ export const getBooks = async () => {
         const response = await apiConnector("GET", `${BASE_URL}/get/book`)
         return response
     }catch(err){
-        throw err
+        console.error("Error occurred while fetching books:", err);
+        throw err;
     }
 }
 
@@ -101,8 +101,6 @@ export const addOrder = async (allOrders: {
 
         const response = await apiConnector("POST", `${BASE_URL}/add/order`, {orders: allOrders}, { "x-access-token": token });
         return response
-        // console.log("RESPONSE FROM API CALL: ", response);
-        // return response.status;
     } catch (error) {
         console.error("Updating Cart Items Failed", error);
         throw error;

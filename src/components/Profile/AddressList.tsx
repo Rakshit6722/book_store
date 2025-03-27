@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from 'react'
 
 type addressListProps = {
-    address: any,
-    index: number
+    readonly address: any,
+    readonly index: number
 }
 
 function AddressList({ address, index }: addressListProps) {
@@ -15,14 +15,14 @@ function AddressList({ address, index }: addressListProps) {
         type: address?.type,
     })
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement> | any) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setAddressData({
             ...addressData,
             [e.target.id]: e.target.value
         })
     }
 
-    const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleRadioChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
         setAddressData({
             ...addressData,
             type: e.target.value
@@ -34,9 +34,9 @@ function AddressList({ address, index }: addressListProps) {
             <div className='flex w-full justify-between'>
                 <div className='flex items-center gap-4'>
                     <p className='text-lg font-semibold'>{index + 1}. {address?.type}</p>
-                    <p onClick={() => {
+                    <button onClick={() => {
                         addressEdit ? setAddressEdit(false) : setAddressEdit(true)
-                    }} className='text-xs font-semibold text-[#A03037] cursor-pointer'>{addressEdit ? "Cancel" : "Edit"}</p>
+                    }} className='text-xs font-semibold text-[#A03037] cursor-pointer'>{addressEdit ? "Cancel" : "Edit"}</button>
                 </div>
                 {
                     addressEdit && (
@@ -48,7 +48,7 @@ function AddressList({ address, index }: addressListProps) {
             </div>
             <form className='w-full mt-3'>
                 <div className='flex flex-col gap-2 mb-3'>
-                    <label className='text-xs font-semibold'>Address</label>
+                    <label htmlFor='address' className='text-xs font-semibold'>Address</label>
                     <textarea
                         onChange={handleChange}
                         disabled={!addressEdit}
@@ -59,22 +59,22 @@ function AddressList({ address, index }: addressListProps) {
                 </div>
                 <div className='flex w-full gap-3 mb-3'>
                     <div className='flex flex-col gap-2 w-1/2'>
-                        <label className='text-xs font-semibold'>city/town</label>
+                        <label htmlFor='address-city' className='text-xs font-semibold'>city/town</label>
                         <input
                             onChange={handleChange}
                             disabled={!addressEdit}
-                            id='city'
+                            id='address-city'
                             className={`w-full text-xs border-[#DCDCDC] text-[#878787] p-3 border-2 ${addressEdit ? 'bg-white' : 'bg-[#F5F5F5]'}`}
                             type='text'
                             value={addressData?.city}
                         />
                     </div>
                     <div className='flex flex-col gap-2 w-1/2'>
-                        <label className='text-xs font-semibold'>State</label>
+                        <label htmlFor='address-state' className='text-xs font-semibold'>State</label>
                         <input
                             onChange={handleChange}
                             disabled={!addressEdit}
-                            id='state'
+                            id='address-state'
                             className={`w-full text-xs border-[#DCDCDC] text-[#878787] p-3 border-2 ${addressEdit ? 'bg-white' : 'bg-[#F5F5F5]'}`}
                             type='text'
                             value={addressData?.state}
