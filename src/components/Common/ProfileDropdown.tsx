@@ -64,7 +64,7 @@ function ProfileDropdown({logout}:{readonly logout: any}) {
             <NavLink to={'/wishlist'} className='flex items-center gap-2 text-sm text-[#878787] font-semibold'>
                 <IoMdHeartEmpty /> <p>My Wishlist</p>
             </NavLink>
-            <button onClick={handleLogout} className='text-[#A03037] font-semibold border-[#A03037] border-2 text-sm py-1 px-9 mt-2'>Logout</button>
+            <button data-testid="logout-button" onClick={handleLogout} className='text-[#A03037] font-semibold border-[#A03037] border-2 text-sm py-1 px-9 mt-2'>Logout</button>
         </div>
     );
 
@@ -78,7 +78,7 @@ function ProfileDropdown({logout}:{readonly logout: any}) {
         >
             <div className='flex flex-col items-center justify-center cursor-pointer'>
                 <div className='flex items-center justify-center h-6'>
-                    <FaRegUser className='text-white text-xl' />
+                    <FaRegUser data-testid="profile-icon" className='text-white text-xl' />
                 </div>
                 <p className='text-white hidden md:block text-xs mt-1'>{profileName ?? "Profile"}</p>
             </div>

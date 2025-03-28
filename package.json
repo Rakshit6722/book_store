@@ -39,6 +39,7 @@
     "@types/react-dom": "^19.0.4",
     "@types/redux-mock-store": "^1.5.0",
     "@types/redux-persist": "^4.0.0",
+    "@types/wallabyjs": "^0.0.15",
     "@vitejs/plugin-react": "^4.3.4",
     "babel-jest": "^29.7.0",
     "eslint": "^9.21.0",
@@ -57,6 +58,7 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0",
-    "vitest": "^3.0.8"
+    "vitest": "^3.0.8",
+    "wallaby": "^1.0.1"
   }
 }

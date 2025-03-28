@@ -29,7 +29,7 @@ const BookCatalogue = () => {
     const bookList = useSelector((state: RootState) => state.bookList.bookList);
     const loading = useSelector((state: RootState) => state.bookList.loading);
 
-    // Pagination State
+
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(8);
 
