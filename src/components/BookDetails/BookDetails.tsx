@@ -143,6 +143,11 @@ function BookDetails() {
     }
 
     const addToCartHandler = async () => {
+        if(!localStorage.getItem("token")){
+            toast.error("Login first")
+            return
+        }
+
         try {
             const response = await addToTheCart(bookDetails._id);
     
@@ -175,18 +180,18 @@ function BookDetails() {
                 <div className='flex xl:gap-2 ml-2 xl:ml-0 w-full space-x-2 justify-end p-2 md:p-4'>
                     {addToCart ? (
                         <div className='h-10 md:h-12 w-32 sm:w-36 md:w-40 flex items-center justify-between'>
-                            <button onClick={decrementCart} className='cursor-pointer w-7 sm:w-8 md:w-9 h-7 sm:h-8 md:h-9 flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border-2 rounded-full'>
+                            <button data-testid="decrementButton" onClick={decrementCart} className='cursor-pointer w-7 sm:w-8 md:w-9 h-7 sm:h-8 md:h-9 flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border-2 rounded-full'>
                                 <p className={`${cartCount === 1 ? "text-[#DBDBDB]" : "text-black"} text-base sm:text-lg`}><FaMinus /></p>
                             </button>
-                            <div className='w-8 sm:w-10 md:w-12 h-7 sm:h-8 md:h-9 select-none flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border-2'>
+                            <div data-testid="cartCount" className='w-8 sm:w-10 md:w-12 h-7 sm:h-8 md:h-9 select-none flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border-2'>
                                 <p className='text-lg sm:text-xl'>{cartCount}</p>
                             </div>
-                            <button onClick={incrementCart} className='cursor-pointer w-7 sm:w-8 md:w-9 h-7 sm:h-8 md:h-9 flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border-2 rounded-full'>
+                            <button data-testid="incrementButton" onClick={incrementCart} className='cursor-pointer w-7 sm:w-8 md:w-9 h-7 sm:h-8 md:h-9 flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border-2 rounded-full'>
                                 <p className='text-lg sm:text-xl'><IoAdd /></p>
                             </button>
                         </div>
                     ) : (
-                        <button onClick={addToCartHandler} className='h-10 md:h-12 w-32 sm:w-36 md:w-40 bg-[#A03037] text-white flex items-center justify-center'>ADD TO BAG</button>
+                        <button data-testid="addToCart-button" onClick={addToCartHandler} className='h-10 md:h-12 w-32 sm:w-36 md:w-40 bg-[#A03037] text-white flex items-center justify-center'>ADD TO BAG</button>
                     )}
 
 
@@ -196,7 +201,7 @@ function BookDetails() {
                             <p className='text-xs sm:text-sm md:text-base font-medium'>WISHLISTED</p>
                         </button>
                     ) : (
-                        <button onClick={addToWishlistHandler} className='h-10 md:h-12 flex select-none items-center justify-center gap-1 sm:gap-2 md:gap-3 w-32 sm:w-36 md:w-40 bg-[#373434] cursor-pointer text-white'>
+                        <button data-testid="wishlist-button" onClick={addToWishlistHandler} className='h-10 md:h-12 flex select-none items-center justify-center gap-1 sm:gap-2 md:gap-3 w-32 sm:w-36 md:w-40 bg-[#373434] cursor-pointer text-white'>
                             <FaHeart className='text-white' />
                             <p className='text-xs sm:text-sm md:text-base'>WISHLIST</p>
                         </button>
