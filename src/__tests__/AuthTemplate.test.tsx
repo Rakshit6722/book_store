@@ -94,8 +94,7 @@ describe("AuthTemplate component tests", () => {
 
     test("login form should submit properly", async () => {
 
-        (login as jest.Mock).mockResolvedValue({ data: { success: true } })
-
+        (login as jest.Mock).mockResolvedValue({ data: { success: true } }) 
         render(
             <MemoryRouter>
                 <AuthTemplate container='login' />
