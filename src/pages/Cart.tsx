@@ -37,9 +37,8 @@ const Cart = () => {
     const [orderSummary, setOrderSummary] = React.useState(false)
     const [cartItems, setCartItems] = React.useState<any[]>([])
 
-    const prevOrderList = useSelector((state: RootState) => state.prevOrderList.prevOrdersList)
     const cart = useSelector((state: RootState) => state.cart.cart)
-    console.log("cart", cart)
+
 
     const token = localStorage.getItem('token')
 
@@ -64,20 +63,17 @@ const Cart = () => {
         }
     })
 
-    console.log("orderSummaryDetails", orderSummaryDetails)
+
 
     useEffect(() => {
         getCartItems()
         // dispatch(resetPrevOrdersList())
     }, [])
 
-    useEffect(() => {
-        console.log("Updated prevOrderList", prevOrderList);
-    }, [prevOrderList]);
 
     const addToPrevOrderList = () => {
         dispatch(setPrevOrdersList(previousOrderList))
-        console.log("prevOrderList", prevOrderList)
+
     }
 
     const removeEverythingFromCart = () => {
@@ -118,7 +114,7 @@ const Cart = () => {
 
     if (!token) {
         return (
-                <Placeholder />
+            <Placeholder />
         )
     }
 
@@ -130,18 +126,7 @@ const Cart = () => {
                 <div className='w-full md:w-[75%] flex flex-col gap-5'>
                     <div className='p-5 flex flex-col gap-2 border-2 border-[#DCDCDC] rounded-sm'>
                         <div className='flex justify-between items-center w-full'>
-                            <p className='font-medium text-lg'>My Cart</p>
-                            {/* dummy locaiton dropdown */}
-                            {/* <div className='cursor-pointer border-2 border-[#DCDCDC] py-1.5 px-7 flex '>
-                                <Dropdown menu={{ items }} trigger={['click']}>
-                                    <a onClick={(e) => e.preventDefault()}>
-                                        <Space>
-                                            Click me
-                                            <DownOutlined />
-                                        </Space>
-                                    </a>
-                                </Dropdown>
-                            </div> */}
+                            <p data-testid="myCart-text" className='font-medium text-lg'>My Cart</p>
                         </div>
                         <div>
                             {
@@ -150,7 +135,7 @@ const Cart = () => {
                                     <div className='flex flex-col items-center justify-center gap-2'>
                                         <p className='text-[#878787]'>No items in the cart</p>
                                     </div>
-                               ) : (
+                                ) : (
                                     <>
                                         {
                                             cartItems.map((cart, index) => (
@@ -193,8 +178,14 @@ const Cart = () => {
                                         </div>
                                     ))
                                 }
-                                <div className='text-right'>
-                                    <button onClick={handleCheckout} className={` uppercase text-white bg-[#3371B5] rounded-sm text-sm py-2 px-7`}>
+                                <div className='flex justify-between items-center mt-4 pt-3 border-t border-[#DCDCDC]'>
+                                    <p className='font-medium'>Total:</p>
+                                    <p className='font-bold'>
+                                        Rs. {cart.reduce((total, book) => total + (book.discountPrice || 0), 0).toFixed(2)}
+                                    </p>
+                                </div>
+                                <div className='text-right mt-4'>
+                                    <button onClick={handleCheckout} className={`uppercase text-white bg-[#3371B5] rounded-sm text-sm py-2 px-7`}>
                                         Checkout
                                     </button>
                                 </div>
