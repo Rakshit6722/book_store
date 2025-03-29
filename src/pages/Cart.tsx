@@ -213,26 +213,32 @@ const Cart = () => {
                         }
                     </div>
 
-                    <div className='p-5 border-2 border-[#DCDCDC] rounded-sm'>
+                     <div className='p-5 border-2 border-[#DCDCDC] rounded-sm'>
                         {
                             orderSummary ? (<>
                                 {
                                     cart.map((cart, index) => (
-                                        <div key={index}>
+                                        <div key={cart._id}>
                                             <OrderSummary book={{ ...cart, cover: bookCover[index % bookCover.length] }} />
                                         </div>
                                     ))
                                 }
-                                <div className='text-right'>
-                                    <button onClick={handleCheckout} className={` uppercase text-white bg-[#3371B5] rounded-sm text-sm py-2 px-7`}>
+                                <div className='flex justify-between items-center mt-4 pt-3 border-t border-[#DCDCDC]'>
+                                    <p className='font-medium'>Total:</p>
+                                    <p className='font-bold'>
+                                        Rs. {cart.reduce((total, book) => total + (book.discountPrice || 0), 0).toFixed(2)}
+                                    </p>
+                                </div>
+                                <div className='text-right mt-4'>
+                                    <button onClick={handleCheckout} className={`uppercase text-white bg-[#3371B5] rounded-sm text-sm py-2 px-7`}>
                                         Checkout
                                     </button>
                                 </div>
-                            </>) : (<>
+                            </>) : (
                                 <div className=''>
                                     <p>Order Summary</p>
                                 </div>
-                            </>)
+                            )
                         }
                     </div>
                 </div>
