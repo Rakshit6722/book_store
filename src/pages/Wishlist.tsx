@@ -30,7 +30,7 @@ function Wishlist() {
         const response = await getWishlist();
         if (response?.data?.success) {
             console.log(response?.data?.result);
-            setWishList(response?.data?.result);
+            setWishList(response?.data?.result.filter((item: { product_id: any }) => item.product_id !== null));
         }
     };
 
