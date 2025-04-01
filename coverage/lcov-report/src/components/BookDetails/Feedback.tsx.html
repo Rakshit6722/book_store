@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -128,18 +128,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,7 +146,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">40x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -176,7 +176,7 @@ import { IoStarOutline, IoStarSharp } from "react-icons/io5";
 &nbsp;
 type FeedbackProps = {
   readonly bookDetails: any,
-  readonly reviews: string[],
+  readonly reviews: any[],
   readonly getReviews: any
 }
 &nbsp;
@@ -187,23 +187,23 @@ function Feedback({bookDetails, reviews, getReviews}: FeedbackProps) {
   }, [bookDetails?._id]);
 &nbsp;
   return (
-    &lt;div className="mt-4"&gt;
+    &lt;div data-testid="review-div" className="mt-4"&gt;
       {reviews.length &gt; 0 ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >        reviews.map(<span class="fstat-no" title="function not covered" >(r</span>eview: any) =&gt; (</span>
-<span class="cstat-no" title="statement not covered" >          &lt;div className="flex gap-4 py-3 border-b border-gray-100 items-start" key={review._id}&gt;</span>
+        reviews.map((review: any) =&gt; (
+          &lt;div className="flex gap-4 py-3 border-b border-gray-100 items-start" key={review._id}&gt;
             &lt;div className="w-10 h-10 bg-[#F5F5F5] flex items-center justify-center rounded-full flex-shrink-0"&gt;
               &lt;p className="text-[#707070] font-medium"&gt;
-                {review.user_id?.fullName?.split(" ")[0]?.charAt(0).toUpperCase() || '?'}
+                {review.user_id?.fullName?.split(" ")[0]?.charAt(0).toUpperCase() || <span class="branch-1 cbranch-no" title="branch not covered" >'?'}</span>
               &lt;/p&gt;
             &lt;/div&gt;
 &nbsp;
             &lt;div className="flex flex-col gap-1 flex-grow"&gt;
               &lt;p className="text-[#0A0102] font-semibold text-sm"&gt;
-                {review.user_id?.fullName || 'Anonymous User'}
+                {review.user_id?.fullName || <span class="branch-1 cbranch-no" title="branch not covered" >'Anonymous User'}</span>
               &lt;/p&gt;
               &lt;div className="flex gap-1"&gt;
-                {[1, 2, 3, 4, 5].map(<span class="fstat-no" title="function not covered" >(s</span>tar) =&gt; (
-<span class="cstat-no" title="statement not covered" >                  &lt;span key={star} className="text-base"&gt;</span>
+                {[1, 2, 3, 4, 5].map((star) =&gt; (
+                  &lt;span key={star} className="text-base"&gt;
                     {star &lt;= review.rating ? (
                       &lt;IoStarSharp className="text-[#FFD700]" /&gt;
                     ) : (
@@ -232,7 +232,7 @@ export default Feedback;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-01T05:08:49.551Z
+                at 2025-04-01T10:11:28.577Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

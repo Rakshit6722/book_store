@@ -3,7 +3,7 @@ import { IoStarOutline, IoStarSharp } from "react-icons/io5";
 
 type FeedbackProps = {
   readonly bookDetails: any,
-  readonly reviews: string[],
+  readonly reviews: any[],
   readonly getReviews: any
 }
 
@@ -14,7 +14,7 @@ function Feedback({bookDetails, reviews, getReviews}: FeedbackProps) {
   }, [bookDetails?._id]);
 
   return (
-    <div className="mt-4">
+    <div data-testid="review-div" className="mt-4">
       {reviews.length > 0 ? (
         reviews.map((review: any) => (
           <div className="flex gap-4 py-3 border-b border-gray-100 items-start" key={review._id}>

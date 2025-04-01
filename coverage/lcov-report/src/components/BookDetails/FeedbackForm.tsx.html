@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.88% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28.57% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.88% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -141,39 +141,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">50x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">115x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -186,7 +184,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -215,35 +215,35 @@ function FeedbackForm({ bookDetails, getReviews }: FeedbackFormProps) {
 &nbsp;
     console.log("bookDetails", bookDetails);
 &nbsp;
-    const submitReviewHandler = <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
-<span class="cstat-no" title="statement not covered" >        try {</span>
-            const response = <span class="cstat-no" title="statement not covered" >await addBookReview(bookDetails?._id, comment, rating)</span>
-<span class="cstat-no" title="statement not covered" >            if(response?.data?.success){</span>
-<span class="cstat-no" title="statement not covered" >                getReviews()</span>
-<span class="cstat-no" title="statement not covered" >                setComment("")</span>
-<span class="cstat-no" title="statement not covered" >                setRating(0)</span>
+    const submitReviewHandler = async () =&gt; {
+        try {
+            const response = await addBookReview(bookDetails?._id, comment, rating)
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(response?.data?.success){
+                getReviews()
+                setComment("")
+                setRating(0)
             }
         } catch (err) {
-<span class="cstat-no" title="statement not covered" >            console.log("Error in submitting review", err)</span>
+            console.log("Error in submitting review", err)
         }
     }
 &nbsp;
     return (
         &lt;div className="flex flex-col gap-4"&gt;
-            &lt;p className="text-lg"&gt;Customer Feedback&lt;/p&gt;
+            &lt;p data-testid="mainHeading-div" className="text-lg"&gt;Customer Feedback&lt;/p&gt;
             &lt;div className="flex flex-col rounded-sm gap-2 bg-[#F5F5F5] p-4"&gt;
                 &lt;p className="text-xs font-semibold"&gt;Overall rating&lt;/p&gt;
                 &lt;div className="flex gap-2"&gt;
                     {[1, 2, 3, 4, 5].map((star) =&gt; (
                         &lt;button
                             key={star}
-                            onMouseEnter={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setHover(star)}</span>
-                            onMouseLeave={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setHover(0)}</span>
-                            onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setRating(star)}</span>
+                            onMouseEnter={() =&gt; setHover(star)}
+                            onMouseLeave={() =&gt; setHover(0)}
+                            onClick={() =&gt; setRating(star)}
                             className="cursor-pointer text-xl"
                         &gt;
                             {star &lt;= (hover || rating) ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >                                &lt;IoStarSharp className="text-[#FFD700]" /&gt;</span>
+                                &lt;IoStarSharp className="text-[#FFD700]" /&gt;
                             ) : (
                                 &lt;IoStarOutline className="text-[#707070]" /&gt;
                             )}
@@ -254,7 +254,7 @@ function FeedbackForm({ bookDetails, getReviews }: FeedbackFormProps) {
                     className="w-full h-24 p-2 placeholder:text-sm"
                     placeholder="Write your review"
                     value={comment}
-                    onChange={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setComment(e.target.value)}</span>
+                    onChange={(e) =&gt; setComment(e.target.value)}
                 &gt;&lt;/textarea&gt;
                 &lt;div className="flex justify-end"&gt;
                     &lt;button onClick={submitReviewHandler} className="bg-[#3371B5] w-24 py-1 rounded-sm text-white text-sm"&gt;
@@ -274,7 +274,7 @@ export default FeedbackForm;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-01T05:08:49.551Z
+                at 2025-04-01T10:11:28.577Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

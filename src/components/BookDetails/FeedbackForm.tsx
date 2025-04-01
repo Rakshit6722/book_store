@@ -29,7 +29,7 @@ function FeedbackForm({ bookDetails, getReviews }: FeedbackFormProps) {
 
     return (
         <div className="flex flex-col gap-4">
-            <p className="text-lg">Customer Feedback</p>
+            <p data-testid="mainHeading-div" className="text-lg">Customer Feedback</p>
             <div className="flex flex-col rounded-sm gap-2 bg-[#F5F5F5] p-4">
                 <p className="text-xs font-semibold">Overall rating</p>
                 <div className="flex gap-2">

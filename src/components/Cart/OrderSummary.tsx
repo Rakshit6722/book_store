@@ -6,7 +6,7 @@ type orderSummaryProps = {
 
 const OrderSummary = ({book}:orderSummaryProps) => {
   return (
-     <div className='flex flex-row gap-2 mt-4'>
+     <div data-testid="orderSummary-div" className='flex flex-row gap-2 mt-4'>
                 <div className='w-24 h-28 p-4 flex justify-center items-center'>
                     <img className='' src={book?.cover} alt='book-image' />
                 </div>
