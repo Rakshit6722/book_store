@@ -27,7 +27,7 @@ const AddressForm = () => {
                 {
                     dummyAddress.map((address, index) => {
                         return (
-                            <div className='w-full mt-6' key={index}>
+                            <div className='w-full mt-6' key={address.state + index}>
                                 <AddressList address={address} index={index} />
                             </div>
                         )

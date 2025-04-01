@@ -12,7 +12,7 @@ function Placeholder() {
     <Header container='home' />
     <div className='flex flex-col justify-center items-center min-h-[75vh] gap-7'>
         <div className='flex flex-col items-center'>
-            <p className='text-xl font-semibold text-[#0A0102]'>PLEASE LOG IN</p>
+            <p data-testid="placeholder-text" className='text-xl font-semibold text-[#0A0102]'>PLEASE LOG IN</p>
             <p className='text-xs text-[#9D9D9D] font-semibold'>Login to view items.</p>
         </div>
         <div>

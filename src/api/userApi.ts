@@ -1,4 +1,3 @@
-import { data, NavigateFunction } from "react-router-dom"
 import { apiConnector } from "../services/apiConnector"
 
 
@@ -9,6 +8,7 @@ export const login = async (data: { email: string, password: string }) => {
         const response = await apiConnector("POST", `${BASE_URL}/login`, data)
         return response
     }catch(err){
+        console.error("Error occurred while logging in:", err)
         throw err
     }
 }

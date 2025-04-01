@@ -1,13 +1,12 @@
 import React, { useContext } from 'react'
 import logo from '../../assets/images/education.svg'
 import { IoIosSearch } from "react-icons/io";
-import { FaRegUser } from "react-icons/fa6";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { IoSearch } from 'react-icons/io5';
 import ProfileDropdown from './ProfileDropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { persistor, RootState } from '../../store';
-import { Navigate, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { resetCart } from '../../services/slice/cartSlice';
 import { removeCartItem, removeWishlist } from '../../api/bookApi';
 import { resetWishList } from '../../services/slice/wishlistSlice';
@@ -29,14 +28,14 @@ const Header = ({ container }: headerProps) => {
     const { wishList } = useSelector((state: RootState) => state.wishList);
 
     const removeEverythingFromCart = () => {
-        cart.map(async (book) => {
+        cart.forEach(async (book) => {
             await removeCartItem(book._id)
         })
         dispatch(resetCart())
     }
 
     const removeEverythingFromWishList = () => {
-        wishList.map(async (book) => {
+        wishList.forEach(async (book) => {
             await removeWishlist(book._id)
         })
         dispatch(resetWishList())

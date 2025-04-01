@@ -1,15 +1,15 @@
-import React from 'react'
 import { GoDotFill } from "react-icons/go";
 import { MdDelete } from "react-icons/md"
 import { removeWishlist } from '../../api/bookApi';
 import { toast } from 'react-toastify';
 import { removeFromWishlist } from '../../services/slice/wishlistSlice';
 import { useDispatch } from 'react-redux';
+import React from "react";
 
 type bookLongCardProps = {
-    book: any,
-    container?: string,
-    getWishlistItems?: any
+    readonly book: any,
+    readonly container?: string,
+    readonly getWishlistItems?: any
 }
 
 function BookLongCard({ book, container, getWishlistItems }: bookLongCardProps) {
@@ -75,9 +75,9 @@ function BookLongCard({ book, container, getWishlistItems }: bookLongCardProps) 
                 }
                 {
                     container === 'wishlist' && (
-                        <div onClick={removeFromWishList}>
+                        <button onClick={removeFromWishList}>
                             <MdDelete className='text-[#9D9D9D] cursor-pointer hover:text-black' />
-                        </div>
+                        </button>
                     )
                 }
             </div>

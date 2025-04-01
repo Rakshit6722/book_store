@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { FaMinus } from 'react-icons/fa6'
 import { IoAdd } from 'react-icons/io5'
 import { removeCartItem, updateCartItem } from '../../api/bookApi'
-import { decrementQuantity, incrementQuantity, removeFromCart, resetCart } from '../../services/slice/cartSlice'
+import { decrementQuantity, incrementQuantity, removeFromCart } from '../../services/slice/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../store'
 import { toast } from 'react-toastify'
@@ -24,7 +24,7 @@ const CartSection = ({ book, product_id, getCartItems }: cartSectionProps) => {
 
     const cartBookDetails = useSelector((state: RootState) => state.cart.cart.find((item) => item._id === book._id))
 
-    const [cartCount, setCartCount] = useState<number>(cartBookDetails?.quantityToBuy || 1)
+    const [cartCount, setCartCount] = useState<number>(cartBookDetails?.quantityToBuy ?? 1)
 
     const incrementCart = async () => {
         const newCount = cartCount + 1
@@ -82,25 +82,25 @@ const CartSection = ({ book, product_id, getCartItems }: cartSectionProps) => {
 
                     <div className='flex gap-5'>
                         <div className='h-8 md:h-10 w-24 sm:w-28 md:w-32 flex items-center justify-between'>
-                            <div
+                            <button
                                 onClick={decrementCart}
                                 className='cursor-pointer w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border rounded-full'
                             >
                                 <p className={`${cartCount === 1 ? "text-[#DBDBDB]" : "text-black"} text-sm sm:text-base`}>
                                     <FaMinus />
                                 </p>
-                            </div>
+                            </button>
                             <div className='w-6 sm:w-8 md:w-10 h-6 sm:h-7 md:h-8 select-none flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border'>
                                 <p className='text-base sm:text-lg'>{cartCount}</p>
                             </div>
-                            <div
+                            <button
                                 onClick={incrementCart}
                                 className='cursor-pointer w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border rounded-full'
                             >
                                 <p className='text-base sm:text-lg'>
                                     <IoAdd />
                                 </p>
-                            </div>
+                            </button>
                         </div>
 
 

@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
 import { IoStarOutline, IoStarSharp } from "react-icons/io5";
-import { getBookReviews } from "../../api/bookApi";
 
 type FeedbackProps = {
-  bookDetails: any,
-  reviews: string[],
-  setReviews: any,
-  getReviews: any
+  readonly bookDetails: any,
+  readonly reviews: string[],
+  readonly getReviews: any
 }
 
-function Feedback({bookDetails, reviews, setReviews, getReviews}: FeedbackProps) {
+function Feedback({bookDetails, reviews, getReviews}: FeedbackProps) {
  
   useEffect(() => {
     getReviews();

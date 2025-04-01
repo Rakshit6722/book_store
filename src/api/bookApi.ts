@@ -7,7 +7,8 @@ export const getBooks = async () => {
         const response = await apiConnector("GET", `${BASE_URL}/get/book`)
         return response
     }catch(err){
-        throw err
+        console.error("Error occurred while fetching books:", err);
+        throw err;
     }
 }
 

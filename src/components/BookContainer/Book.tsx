@@ -32,7 +32,7 @@ const Book = ({ book }: bookProps) => {
                 </div>
                 <div className='mt-1 flex items-center space-x-2'>
                     <p className='font-semibold'>Rs. {book.discountPrice}</p>
-                    <p className='text-[#878787] text-xs line-through'>{book.price}</p>
+                    <p data-testid="book-price" className='text-[#878787] text-xs line-through'>{book.price}</p>
                 </div>
             </div>
         </div>

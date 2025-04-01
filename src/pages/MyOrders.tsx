@@ -1,11 +1,8 @@
-import React from 'react'
 import Header from '../components/Common/Header'
 import Footer from '../components/Common/Footer'
-import bookCover from '../assets/images/bookImage.png'
 import BookLongCard from '../components/Common/BookLongCard'
 import Breadcrumbs from '../components/Common/Breadcrumbs'
 import Placeholder from '../components/Common/Placeholder'
-import useSelection from 'antd/es/table/hooks/useSelection'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
 import bookCover1 from '../assets/images/BookCover1.png'
@@ -60,7 +57,7 @@ function MyOrders() {
                         {
                             prevOrderList.map((order, index) => {
                                 return (
-                                    <div key={index} className='py-2'>
+                                    <div key={order} className='py-2'>
                                         <BookLongCard book={{ ...order, cover: bookCovers[index % bookCovers.length] }} container='order' />
                                     </div>
                                 )
