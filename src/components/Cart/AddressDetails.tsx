@@ -334,6 +334,7 @@ const AddressDetails = ({ orderSummary, setOrderSummary }: addressDetailsProps) 
 
                 <div className="flex justify-end mt-4">
                     <button
+                        data-testid="addressContinue-button"
                         onClick={() => setOrderSummary(true)}
                         className={`${orderSummary ? "hidden" : ""} uppercase text-white bg-[#3371B5] rounded-sm text-sm py-2 px-5 w-32`}
                     >

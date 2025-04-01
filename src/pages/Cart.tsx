@@ -150,13 +150,13 @@ const Cart = () => {
                             }
                         </div>
                         <div className='text-right'>
-                            <button disabled={cartItems.length === 0} onClick={() => setAddressDetails(true)} className={` ${addressDetails ? "hidden" : ""} uppercase text-white ${cartItems.length === 0 ? "bg-gray-500" : "bg-[#3371B5]"} ${cartItems.length === 0 ? "hidden" : ""}  rounded-sm text-sm py-2 px-7`}>
+                            <button data-testid="placeOrder-button" disabled={cartItems.length === 0} onClick={() => setAddressDetails(true)} className={` ${addressDetails ? "hidden" : ""} uppercase text-white ${cartItems.length === 0 ? "bg-gray-500" : "bg-[#3371B5]"} ${cartItems.length === 0 ? "hidden" : ""}  rounded-sm text-sm py-2 px-7`}>
                                 Place Order
                             </button>
                         </div>
                     </div>
 
-                    <div className='p-5 border-2 border-[#DCDCDC] rounded-sm'>
+                    <div data-testid="addressDetails-accordion" className='p-5 border-2 border-[#DCDCDC] rounded-sm'>
                         {
                             addressDetails ? (
                                 <AddressDetails orderSummary={orderSummary} setOrderSummary={setOrderSummary} />
@@ -185,7 +185,7 @@ const Cart = () => {
                                     </p>
                                 </div>
                                 <div className='text-right mt-4'>
-                                    <button onClick={handleCheckout} className={`uppercase text-white bg-[#3371B5] rounded-sm text-sm py-2 px-7`}>
+                                    <button data-testid="ordersummaryCheckout-button" onClick={handleCheckout} className={`uppercase text-white bg-[#3371B5] rounded-sm text-sm py-2 px-7`}>
                                         Checkout
                                     </button>
                                 </div>

@@ -35,7 +35,6 @@ const BookCatalogue = () => {
 
     useEffect(() => {
         getBooksList();
-        // dispatch(resetCart())
     }, []);
 
     const getBooksList = async () => {
@@ -84,7 +83,7 @@ const BookCatalogue = () => {
 
     if (loading) {
         return (
-            <div className='flex justify-center items-center h-[75vh]'>
+            <div data-testid="loading-div" className='flex justify-center items-center h-[75vh]'>
                 <Spin indicator={<LoadingOutlined style={{ fontSize: 48, color: "#A03037" }} spin />} />
             </div>
         );
@@ -92,7 +91,7 @@ const BookCatalogue = () => {
 
     return (
         <div className='flex flex-col justify-between min-h-[80vh]'>
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+            <div data-testid="bookcatalogue-div" className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
                 {paginatedBooks.length > 0 ? (
                     paginatedBooks.map((book, index) => (
                         <NavLink to={`/book/${book._id}`} key={book._id}>
@@ -109,7 +108,7 @@ const BookCatalogue = () => {
             </div>
 
             {filteredBooks.length > pageSize && (
-                <div className='flex justify-center mt-10 mb-6'>
+                <div data-testid="pagination-div" className='flex justify-center mt-10 mb-6'>
                     <Pagination
                         current={currentPage}
                         pageSize={pageSize}
