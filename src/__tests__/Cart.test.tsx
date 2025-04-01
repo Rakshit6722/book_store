@@ -39,6 +39,15 @@ describe("Cart component test", () => {
         localStorage.clear()
     })
 
+    beforeAll(() => {
+        jest.spyOn(console, "log").mockImplementation(() => { });
+    })
+
+    afterAll(() => {
+        jest.restoreAllMocks();
+    });
+
+
     test("component should render", () => {
 
         localStorage.setItem("token", "fake-token")
@@ -284,4 +293,3 @@ describe("Cart component test", () => {
     });
 
 });
-

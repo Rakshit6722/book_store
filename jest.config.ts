@@ -7,9 +7,10 @@ export default {
     "\\.(css|less|sass|scss)$": "identity-obj-proxy", 
     '\\.(png|jpg|jpeg|gif|svg)$': '<rootDir>/src/__mocks__/fileMock.ts',
   },
-  setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"], 
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'], 
   transform: {
-    "^.+\\.(ts|tsx|js|jsx)$": "babel-jest"
+    "^.+\\.(ts|tsx|js|jsx)$": "babel-jest",
+    '^.+\\.ts$': 'ts-jest',
   },
   testPathIgnorePatterns: ["/node_modules/", "/dist/"],
 };

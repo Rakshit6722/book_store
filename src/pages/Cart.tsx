@@ -168,7 +168,7 @@ const Cart = () => {
                         }
                     </div>
 
-                     <div className='p-5 border-2 border-[#DCDCDC] rounded-sm'>
+                    <div className='p-5 border-2 border-[#DCDCDC] rounded-sm'>
                         {
                             orderSummary ? (<>
                                 {
