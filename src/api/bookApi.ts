@@ -1,13 +1,21 @@
 import { apiConnector } from "../services/apiConnector"
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
+const PROXY_URL = import.meta.env.VITE_PROXY_URL
 
 export const getBooks = async () => {
     try{
         const response = await apiConnector("GET", `${BASE_URL}/get/book`)
         return response
     }catch(err){
-        throw err
+        console.error("Main API failed to fetch books", err)
+        try{
+            const proxyResponse = await apiConnector("GET", `${PROXY_URL}`)
+            return proxyResponse
+        }catch(prxyErr){
+            console.error("Proxy API failed to fetch books", prxyErr)
+            throw prxyErr
+        }
     }
 }
 

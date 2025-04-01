@@ -16,6 +16,7 @@
     "antd": "^5.24.3",
     "autoprefixer": "^10.4.20",
     "axios": "^1.8.2",
+    "json-server": "^1.0.0-beta.3",
     "postcss-cli": "^11.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

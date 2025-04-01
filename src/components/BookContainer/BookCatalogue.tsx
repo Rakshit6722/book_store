@@ -42,7 +42,7 @@ const BookCatalogue = () => {
     const getBooksList = async () => {
         dispatch(setLoading(true));
         const response = await getBooks();
-        dispatch(setBookList(response?.data?.result || []));
+        dispatch(setBookList(response?.data?.result || response?.data || []));
         dispatch(setLoading(false));
     };
 
