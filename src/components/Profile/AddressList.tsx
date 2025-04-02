@@ -63,6 +63,7 @@ function AddressList({ address, index }: addressListProps) {
                         <input
                             onChange={handleChange}
                             disabled={!addressEdit}
+                            data-testid='address-city'
                             id='address-city'
                             className={`w-full text-xs border-[#DCDCDC] text-[#878787] p-3 border-2 ${addressEdit ? 'bg-white' : 'bg-[#F5F5F5]'}`}
                             type='text'
@@ -75,6 +76,7 @@ function AddressList({ address, index }: addressListProps) {
                             onChange={handleChange}
                             disabled={!addressEdit}
                             id='address-state'
+                            data-testid='address-state'
                             className={`w-full text-xs border-[#DCDCDC] text-[#878787] p-3 border-2 ${addressEdit ? 'bg-white' : 'bg-[#F5F5F5]'}`}
                             type='text'
                             value={addressData?.state}
@@ -89,6 +91,7 @@ function AddressList({ address, index }: addressListProps) {
                                 onChange={handleRadioChange}
                                 type="radio"
                                 name={`addressType-${index}`}
+                                data-testid="address-type"
                                 value="Home"
                                 defaultChecked={addressData?.type === "Home"}
                                 className="accent-[#A03037]"
@@ -102,6 +105,7 @@ function AddressList({ address, index }: addressListProps) {
                                 type="radio"
                                 name={`addressType-${index}`}
                                 value="Work"
+                                data-testid="address-type"
                                 defaultChecked={addressData?.type === "Work"}
                                 className="accent-[#A03037]"
                                 disabled={!addressEdit}
@@ -115,6 +119,7 @@ function AddressList({ address, index }: addressListProps) {
                                 name={`addressType-${index}`}
                                 value="Other"
                                 defaultChecked={addressData?.type === "Other"}
+                                data-testid="address-type"
                                 className="accent-[#A03037]"
                                 disabled={!addressEdit}
                             />

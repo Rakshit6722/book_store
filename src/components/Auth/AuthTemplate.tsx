@@ -222,7 +222,7 @@ function AuthTemplate({ container }: authTemplateProps) {
                     <label className='text-xs font-normal mb-1' htmlFor='mobile'>Mobile Number</label>
                     <input
                       type='tel'
-                        data-testid="register-mobileNumber"
+                      data-testid="register-mobileNumber"
                       id='mobile'
                       value={formData.mobile}
                       onChange={handleChange}
@@ -262,11 +262,13 @@ function AuthTemplate({ container }: authTemplateProps) {
                       />
                       {passwordVisible ? (
                         <IoEyeOff
+                          data-testid="eye-icon"
                           onClick={() => setPasswordVisible(!passwordVisible)}
                           className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]'
                         />
                       ) : (
                         <IoEye
+                          data-testid="eye-icon"
                           onClick={() => setPasswordVisible(!passwordVisible)}
                           className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]'
                         />

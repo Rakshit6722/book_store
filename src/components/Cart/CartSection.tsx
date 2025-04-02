@@ -1,4 +1,5 @@
-import { useState } from 'react'
+
+import React, { useState } from 'react'
 import { FaMinus } from 'react-icons/fa6'
 import { IoAdd } from 'react-icons/io5'
 import { removeCartItem, updateCartItem } from '../../api/bookApi'
@@ -86,18 +87,18 @@ const CartSection = ({ book, product_id, getCartItems }: cartSectionProps) => {
                                 onClick={decrementCart}
                                 className='cursor-pointer w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border rounded-full'
                             >
-                                <p className={`${cartCount === 1 ? "text-[#DBDBDB]" : "text-black"} text-sm sm:text-base`}>
+                                <p data-testid="Decrement" className={`${cartCount === 1 ? "text-[#DBDBDB]" : "text-black"} text-sm sm:text-base`}>
                                     <FaMinus />
                                 </p>
                             </button>
                             <div className='w-6 sm:w-8 md:w-10 h-6 sm:h-7 md:h-8 select-none flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border'>
-                                <p className='text-base sm:text-lg'>{cartCount}</p>
+                                <p data-testid="CartCount" className='text-base sm:text-lg'>{cartCount}</p>
                             </div>
                             <button
                                 onClick={incrementCart}
                                 className='cursor-pointer w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 flex items-center justify-center bg-[#FAFAFA] border-[#DBDBDB] border rounded-full'
                             >
-                                <p className='text-base sm:text-lg'>
+                                <p data-testid="Increment" className='text-base sm:text-lg'>
                                     <IoAdd />
                                 </p>
                             </button>
