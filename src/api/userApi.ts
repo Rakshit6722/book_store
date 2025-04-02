@@ -2,7 +2,7 @@ import { data, NavigateFunction } from "react-router-dom"
 import { apiConnector } from "../services/apiConnector"
 
 
-const BASE_URL = import.meta.env.BASE_URL
+const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export const login = async (data: { email: string, password: string }) => {
     try{

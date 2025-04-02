@@ -42,12 +42,13 @@ const Header = ({ container }: headerProps) => {
         dispatch(resetWishList())
     }
 
-    const logout = () => {
+    const logout = async  () => {
         removeEverythingFromCart()
         removeEverythingFromWishList()
         localStorage.removeItem('token')
         localStorage.removeItem('name')
-        persistor.purge()
+        await persistor.purge()
+        await persistor.flush();
         navigate("/")
         toast.success("Logged out successfully")
     }
