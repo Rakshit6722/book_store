@@ -279,4 +279,33 @@ describe("AuthTemplate component tests", () => {
         }, { timeout: 3000 });
     });
 
+    test("password should not be visible initially", () => {
+        render(
+            <MemoryRouter>
+                <AuthTemplate container='login' />
+            </MemoryRouter>
+        )
+
+        const passwordInputField = screen.getByTestId(/login-password-input/i)
+
+        expect(passwordInputField).toHaveAttribute("type", "password")
+    })
+
+    test("password should be visible when eye icon is clicked", () => {
+        render(
+            <MemoryRouter>
+                <AuthTemplate container='login' />
+            </MemoryRouter>
+        )
+
+        const passwordInputField = screen.getByTestId(/login-password-input/i)
+        const eyeIcon = screen.getByTestId(/eye-icon/i)
+
+        fireEvent.click(eyeIcon)
+
+        waitFor(() => {
+            expect(passwordInputField).toHaveAttribute("type", "text")
+        })
+    })
+
 })
