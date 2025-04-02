@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">92.3% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/26</span>
+                <span class='fraction'>24/26</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">44.44% </span>
+                <span class="strong">77.77% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/9</span>
+                <span class='fraction'>7/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.83% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/24</span>
+                <span class='fraction'>22/24</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -189,39 +189,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-yes">39x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -302,28 +302,28 @@ const Header = ({ container }: headerProps) =&gt; {
     const { cart } = useSelector((state: RootState) =&gt; state.cart);
     const { wishList } = useSelector((state: RootState) =&gt; state.wishList);
 &nbsp;
-    const removeEverythingFromCart = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >        cart.forEach(<span class="fstat-no" title="function not covered" >as</span>ync (book) =&gt; {</span>
+    const removeEverythingFromCart = () =&gt; {
+        cart.forEach(<span class="fstat-no" title="function not covered" >as</span>ync (book) =&gt; {
 <span class="cstat-no" title="statement not covered" >            await removeCartItem(book._id)</span>
         })
-<span class="cstat-no" title="statement not covered" >        dispatch(resetCart())</span>
+        dispatch(resetCart())
     }
 &nbsp;
-    const removeEverythingFromWishList = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >        wishList.forEach(<span class="fstat-no" title="function not covered" >as</span>ync (book) =&gt; {</span>
+    const removeEverythingFromWishList = () =&gt; {
+        wishList.forEach(<span class="fstat-no" title="function not covered" >as</span>ync (book) =&gt; {
 <span class="cstat-no" title="statement not covered" >            await removeWishlist(book._id)</span>
         })
-<span class="cstat-no" title="statement not covered" >        dispatch(resetWishList())</span>
+        dispatch(resetWishList())
     }
 &nbsp;
-    const logout = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >        removeEverythingFromCart()</span>
-<span class="cstat-no" title="statement not covered" >        removeEverythingFromWishList()</span>
-<span class="cstat-no" title="statement not covered" >        localStorage.removeItem('token')</span>
-<span class="cstat-no" title="statement not covered" >        localStorage.removeItem('name')</span>
-<span class="cstat-no" title="statement not covered" >        persistor.purge()</span>
-<span class="cstat-no" title="statement not covered" >        navigate("/")</span>
-<span class="cstat-no" title="statement not covered" >        toast.success("Logged out successfully")</span>
+    const logout = () =&gt; {
+        removeEverythingFromCart()
+        removeEverythingFromWishList()
+        localStorage.removeItem('token')
+        localStorage.removeItem('name')
+        persistor.purge()
+        navigate("/")
+        toast.success("Logged out successfully")
     }
 &nbsp;
     return (
@@ -385,7 +385,7 @@ export default Header</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-01T10:11:28.577Z
+                at 2025-04-02T06:00:56.465Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
