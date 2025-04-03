@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1743573656576" clover="3.2.0">
-  <project timestamp="1743573656577" name="All files">
-    <metrics statements="578" coveredstatements="377" conditionals="280" coveredconditionals="183" methods="165" coveredmethods="95" elements="1023" coveredelements="655" complexity="0" loc="578" ncloc="578" packages="12" files="31" classes="31"/>
+<coverage generated="1743653499144" clover="3.2.0">
+  <project timestamp="1743653499144" name="All files">
+    <metrics statements="578" coveredstatements="403" conditionals="280" coveredconditionals="192" methods="165" coveredmethods="99" elements="1023" coveredelements="694" complexity="0" loc="578" ncloc="578" packages="12" files="31" classes="31"/>
     <package name="src">
       <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="store.ts" path="C:\Users\raksh\Desktop\Brideglabz_projects\book_store\src\store.ts">
@@ -247,39 +247,39 @@
       </file>
     </package>
     <package name="src.components.BookDetails">
-      <metrics statements="108" coveredstatements="84" conditionals="48" coveredconditionals="30" methods="28" coveredmethods="25"/>
+      <metrics statements="108" coveredstatements="103" conditionals="48" coveredconditionals="39" methods="28" coveredmethods="28"/>
       <file name="BookDetails.tsx" path="C:\Users\raksh\Desktop\Brideglabz_projects\book_store\src\components\BookDetails\BookDetails.tsx">
-        <metrics statements="85" coveredstatements="61" conditionals="34" coveredconditionals="19" methods="17" coveredmethods="14"/>
+        <metrics statements="85" coveredstatements="80" conditionals="34" coveredconditionals="28" methods="17" coveredmethods="17"/>
         <line num="20" count="1" type="stmt"/>
-        <line num="34" count="10" type="stmt"/>
-        <line num="35" count="10" type="stmt"/>
-        <line num="36" count="16" type="stmt"/>
-        <line num="37" count="16" type="stmt"/>
-        <line num="38" count="16" type="stmt"/>
-        <line num="40" count="10" type="stmt"/>
-        <line num="42" count="10" type="stmt"/>
-        <line num="43" count="10" type="stmt"/>
-        <line num="44" count="10" type="stmt"/>
-        <line num="45" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="47" count="10" type="stmt"/>
-        <line num="48" count="10" type="stmt"/>
-        <line num="49" count="10" type="stmt"/>
-        <line num="51" count="10" type="stmt"/>
-        <line num="52" count="6" type="stmt"/>
-        <line num="53" count="6" type="stmt"/>
-        <line num="54" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="55" count="1" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="61" count="10" type="stmt"/>
-        <line num="62" count="6" type="stmt"/>
-        <line num="63" count="6" type="stmt"/>
-        <line num="64" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="68" count="0" type="stmt"/>
-        <line num="73" count="10" type="stmt"/>
-        <line num="75" count="1" type="cond" truecount="2" falsecount="2"/>
-        <line num="76" count="0" type="stmt"/>
-        <line num="77" count="0" type="stmt"/>
+        <line num="34" count="26" type="stmt"/>
+        <line num="35" count="26" type="stmt"/>
+        <line num="36" count="40" type="stmt"/>
+        <line num="37" count="40" type="stmt"/>
+        <line num="38" count="40" type="stmt"/>
+        <line num="40" count="26" type="stmt"/>
+        <line num="42" count="26" type="stmt"/>
+        <line num="43" count="26" type="stmt"/>
+        <line num="44" count="26" type="stmt"/>
+        <line num="45" count="26" type="cond" truecount="1" falsecount="1"/>
+        <line num="47" count="26" type="stmt"/>
+        <line num="48" count="26" type="stmt"/>
+        <line num="49" count="26" type="stmt"/>
+        <line num="51" count="26" type="stmt"/>
+        <line num="52" count="14" type="stmt"/>
+        <line num="53" count="14" type="stmt"/>
+        <line num="54" count="14" type="cond" truecount="2" falsecount="0"/>
+        <line num="55" count="3" type="stmt"/>
+        <line num="56" count="3" type="stmt"/>
+        <line num="61" count="26" type="stmt"/>
+        <line num="62" count="14" type="stmt"/>
+        <line num="63" count="14" type="stmt"/>
+        <line num="64" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="68" count="2" type="stmt"/>
+        <line num="73" count="26" type="stmt"/>
+        <line num="75" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
         <line num="79" count="1" type="stmt"/>
         <line num="80" count="1" type="stmt"/>
         <line num="81" count="1" type="stmt"/>
@@ -287,70 +287,70 @@
         <line num="83" count="1" type="stmt"/>
         <line num="84" count="1" type="stmt"/>
         <line num="86" count="0" type="stmt"/>
-        <line num="90" count="10" type="stmt"/>
-        <line num="91" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="90" count="26" type="stmt"/>
+        <line num="91" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="92" count="1" type="stmt"/>
         <line num="93" count="1" type="stmt"/>
         <line num="94" count="1" type="stmt"/>
         <line num="95" count="1" type="stmt"/>
         <line num="96" count="1" type="stmt"/>
         <line num="98" count="0" type="stmt"/>
-        <line num="103" count="10" type="stmt"/>
-        <line num="104" count="6" type="stmt"/>
-        <line num="105" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="106" count="0" type="stmt"/>
-        <line num="107" count="0" type="stmt"/>
-        <line num="109" count="6" type="stmt"/>
-        <line num="112" count="10" type="stmt"/>
-        <line num="113" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="103" count="26" type="stmt"/>
+        <line num="104" count="15" type="stmt"/>
+        <line num="105" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="106" count="2" type="stmt"/>
+        <line num="107" count="2" type="stmt"/>
+        <line num="109" count="13" type="stmt"/>
+        <line num="112" count="26" type="stmt"/>
+        <line num="113" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="114" count="1" type="stmt"/>
         <line num="115" count="1" type="stmt"/>
-        <line num="117" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="119" count="0" type="stmt"/>
-        <line num="120" count="0" type="stmt"/>
-        <line num="121" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="122" count="0" type="stmt"/>
-        <line num="123" count="0" type="stmt"/>
-        <line num="124" count="0" type="stmt"/>
+        <line num="117" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="119" count="1" type="stmt"/>
+        <line num="120" count="1" type="stmt"/>
+        <line num="121" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="122" count="1" type="stmt"/>
+        <line num="123" count="1" type="stmt"/>
+        <line num="124" count="1" type="stmt"/>
         <line num="127" count="0" type="stmt"/>
-        <line num="131" count="10" type="stmt"/>
-        <line num="133" count="0" type="stmt"/>
-        <line num="134" count="0" type="stmt"/>
-        <line num="135" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="136" count="0" type="stmt"/>
-        <line num="137" count="0" type="stmt"/>
-        <line num="138" count="0" type="stmt"/>
+        <line num="131" count="26" type="stmt"/>
+        <line num="133" count="1" type="stmt"/>
+        <line num="134" count="1" type="stmt"/>
+        <line num="135" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="136" count="1" type="stmt"/>
+        <line num="137" count="1" type="stmt"/>
+        <line num="138" count="1" type="stmt"/>
         <line num="141" count="0" type="stmt"/>
-        <line num="145" count="10" type="stmt"/>
+        <line num="145" count="26" type="stmt"/>
         <line num="146" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="147" count="2" type="stmt"/>
-        <line num="148" count="2" type="stmt"/>
-        <line num="151" count="1" type="stmt"/>
-        <line num="152" count="1" type="stmt"/>
-        <line num="154" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="155" count="1" type="stmt"/>
-        <line num="156" count="1" type="stmt"/>
-        <line num="157" count="1" type="stmt"/>
-        <line num="158" count="1" type="stmt"/>
+        <line num="147" count="1" type="stmt"/>
+        <line num="148" count="1" type="stmt"/>
+        <line num="151" count="2" type="stmt"/>
+        <line num="152" count="2" type="stmt"/>
+        <line num="154" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="155" count="2" type="stmt"/>
+        <line num="156" count="2" type="stmt"/>
+        <line num="157" count="2" type="stmt"/>
+        <line num="158" count="2" type="stmt"/>
         <line num="161" count="0" type="stmt"/>
-        <line num="165" count="10" type="stmt"/>
-        <line num="171" count="50" type="cond" truecount="2" falsecount="0"/>
+        <line num="165" count="26" type="stmt"/>
+        <line num="171" count="130" type="cond" truecount="2" falsecount="0"/>
       </file>
       <file name="Feedback.tsx" path="C:\Users\raksh\Desktop\Brideglabz_projects\book_store\src\components\BookDetails\Feedback.tsx">
         <metrics statements="5" coveredstatements="5" conditionals="8" coveredconditionals="6" methods="4" coveredmethods="4"/>
-        <line num="12" count="15" type="stmt"/>
-        <line num="13" count="11" type="stmt"/>
-        <line num="16" count="15" type="stmt"/>
+        <line num="12" count="31" type="stmt"/>
+        <line num="13" count="19" type="stmt"/>
+        <line num="16" count="31" type="stmt"/>
         <line num="20" count="8" type="stmt"/>
         <line num="33" count="40" type="stmt"/>
       </file>
       <file name="FeedbackForm.tsx" path="C:\Users\raksh\Desktop\Brideglabz_projects\book_store\src\components\BookDetails\FeedbackForm.tsx">
         <metrics statements="18" coveredstatements="18" conditionals="6" coveredconditionals="5" methods="7" coveredmethods="7"/>
-        <line num="11" count="23" type="stmt"/>
-        <line num="12" count="23" type="stmt"/>
-        <line num="13" count="23" type="stmt"/>
-        <line num="15" count="23" type="stmt"/>
-        <line num="17" count="23" type="stmt"/>
+        <line num="11" count="39" type="stmt"/>
+        <line num="12" count="39" type="stmt"/>
+        <line num="13" count="39" type="stmt"/>
+        <line num="15" count="39" type="stmt"/>
+        <line num="17" count="39" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
         <line num="19" count="2" type="stmt"/>
         <line num="20" count="1" type="cond" truecount="1" falsecount="1"/>
@@ -358,8 +358,8 @@
         <line num="22" count="1" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
-        <line num="30" count="23" type="stmt"/>
-        <line num="37" count="115" type="stmt"/>
+        <line num="30" count="39" type="stmt"/>
+        <line num="37" count="195" type="stmt"/>
         <line num="39" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
         <line num="41" count="2" type="stmt"/>
@@ -367,7 +367,7 @@
       </file>
     </package>
     <package name="src.components.Cart">
-      <metrics statements="65" coveredstatements="47" conditionals="26" coveredconditionals="18" methods="22" coveredmethods="13"/>
+      <metrics statements="65" coveredstatements="54" conditionals="26" coveredconditionals="18" methods="22" coveredmethods="14"/>
       <file name="AddressDetails.tsx" path="C:\Users\raksh\Desktop\Brideglabz_projects\book_store\src\components\Cart\AddressDetails.tsx">
         <metrics statements="32" coveredstatements="22" conditionals="18" coveredconditionals="12" methods="14" coveredmethods="6"/>
         <line num="3" count="2" type="stmt"/>
@@ -404,38 +404,38 @@
         <line num="338" count="1" type="stmt"/>
       </file>
       <file name="CartSection.tsx" path="C:\Users\raksh\Desktop\Brideglabz_projects\book_store\src\components\Cart\CartSection.tsx">
-        <metrics statements="31" coveredstatements="23" conditionals="8" coveredconditionals="6" methods="7" coveredmethods="6"/>
+        <metrics statements="31" coveredstatements="30" conditionals="8" coveredconditionals="6" methods="7" coveredmethods="7"/>
         <line num="17" count="2" type="stmt"/>
-        <line num="21" count="7" type="stmt"/>
-        <line num="23" count="13" type="stmt"/>
-        <line num="24" count="7" type="stmt"/>
-        <line num="26" count="13" type="stmt"/>
-        <line num="28" count="7" type="cond" truecount="2" falsecount="0"/>
-        <line num="30" count="7" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
+        <line num="21" count="12" type="stmt"/>
+        <line num="23" count="21" type="stmt"/>
+        <line num="24" count="12" type="stmt"/>
+        <line num="26" count="21" type="stmt"/>
+        <line num="28" count="12" type="cond" truecount="1" falsecount="1"/>
+        <line num="30" count="12" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
         <line num="35" count="1" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="41" count="7" type="stmt"/>
-        <line num="42" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="41" count="12" type="stmt"/>
+        <line num="42" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
-        <line num="55" count="7" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
+        <line num="55" count="12" type="stmt"/>
+        <line num="56" count="2" type="stmt"/>
+        <line num="57" count="2" type="stmt"/>
         <line num="58" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="59" count="1" type="stmt"/>
         <line num="60" count="1" type="stmt"/>
         <line num="61" count="1" type="stmt"/>
         <line num="63" count="1" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="70" count="7" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="70" count="12" type="stmt"/>
       </file>
       <file name="OrderSummary.tsx" path="C:\Users\raksh\Desktop\Brideglabz_projects\book_store\src\components\Cart\OrderSummary.tsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
