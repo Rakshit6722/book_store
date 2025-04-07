@@ -274,7 +274,7 @@ function AuthTemplate({ container }: authTemplateProps) {
                         />
                       )}
                       {error.password && <p className='text-red-600 text-xs self-start'>{error.password}</p>}
-                      <NavLink to={'forgotPassword'}>
+                      <NavLink to={'/forgotPassword'}>
                         <p className='w-full text-right text-xs text-[#9D9D9D] mt-1 cursor-pointer'>Forget Password?</p>
                       </NavLink>
                     </div>
