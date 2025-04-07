@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import loginSignUpImage from '../../assets/images/loginSignupImage.png'
 import { NavLink, useNavigate } from 'react-router-dom';
-import { IoEyeOff } from "react-icons/io5";
-import { IoEye } from "react-icons/io5";
+import { IoEyeOff, IoEye } from "react-icons/io5";
 import { login, register } from '../../api/userApi';
 import { toast } from 'react-toastify';
 
 type authTemplateProps = {
-  container: string;
+  readonly container: string;
 }
 
 function AuthTemplate({ container }: authTemplateProps) {
@@ -92,11 +91,22 @@ function AuthTemplate({ container }: authTemplateProps) {
     e.preventDefault();
 
     if (!validateForm()) return;
-    setLoading(true)  
+    setLoading(true)
     if (container === "login") {
       try {
         const data = await login({ email: formData.email, password: formData.password })
-        if(data?.data?.success){
+        if (data?.data?.success) {
+          if (data?.data?.message === 'please enter valid password' || data?.data?.message === 'user not found, please enter registered email address') {
+            toast.error(data?.data?.message)
+            setLoading(false)
+            setFormData({
+              fullName: "",
+              email: "",
+              password: "",
+              mobile: ""
+            })
+            return
+          }
           localStorage.setItem('token', data?.data?.result.accessToken)
           localStorage.setItem("name", formData.email.split("@")[0])
           toast.success("Login Success")
@@ -142,7 +152,7 @@ function AuthTemplate({ container }: authTemplateProps) {
             <img className='rounded-full w-[55%]' src={loginSignUpImage} alt='login-signup-image' />
           </div>
           <div className='w-2/4 ml-12 text-center'>
-            <p className='font-semibold text-[#0A0102]'>ONLINE BOOK SHOPPING</p>
+            <p data-testid="image-text" className='font-semibold text-[#0A0102]'>ONLINE BOOK SHOPPING</p>
           </div>
         </div>
 
@@ -152,25 +162,26 @@ function AuthTemplate({ container }: authTemplateProps) {
             <div className={'flex justify-center font-semibold text-2xl px-12 py-5 pb-0 space-x-14 mt-1'}>
               <div className='mr-8'>
                 <NavLink to={'/login'}>
-                  <p className={`${container === "login" ? "text-black" : "text-[#878787]"} cursor-pointer`}>LOGIN</p>
+                  <p data-testid="login-link" className={`${container === "login" ? "text-black" : "text-[#878787]"} cursor-pointer`}>LOGIN</p>
                   {container === "login" && <div className='border-b-[8px] rounded-xl ml-7 border-[#A03037] w-[32%] mt-1'></div>}
                 </NavLink>
               </div>
               <div className='flex flex-col'>
                 <NavLink to={'/register'}>
-                  <p className={`${container === "register" ? "text-black" : "text-[#878787]"} cursor-pointer`}>SIGNUP</p>
+                  <p data-testid="register-link" className={`${container === "register" ? "text-black" : "text-[#878787]"} cursor-pointer`}>SIGNUP</p>
                   {container === "register" && <div className='border-b-[8px] rounded-xl ml-8 border-[#A03037] w-[32%] mt-1'></div>}
                 </NavLink>
               </div>
             </div>
           </div>
           <div className='w-full flex-col flex justify-center'>
-            <form onSubmit={handleSubmit} className='w-full max-w-xs mx-auto'>
+            <form data-testid="form" onSubmit={handleSubmit} className='w-full max-w-xs mx-auto'>
               {container === "register" && (
                 <div className='flex w-full flex-col space-y-2 align-center justify-center px-7 py-3'>
                   <div className='flex flex-col'>
                     <label className='text-xs font-normal mb-1' htmlFor='fullName'>Full Name</label>
                     <input
+                      data-testid="register-fullName"
                       type='text'
                       id='fullName'
                       value={formData.fullName}
@@ -182,6 +193,7 @@ function AuthTemplate({ container }: authTemplateProps) {
                   <div className='flex flex-col'>
                     <label className='text-xs font-normal mb-1' htmlFor='email'>Email Id</label>
                     <input
+                      data-testid="register-email"
                       type='email'
                       id='email'
                       value={formData.email}
@@ -194,6 +206,7 @@ function AuthTemplate({ container }: authTemplateProps) {
                     <label className='text-xs font-normal mb-1' htmlFor='password'>Password</label>
                     <div className='relative flex-col w-full justify-center'>
                       <input
+                        data-testid="register-password"
                         type={passwordVisible ? "text" : "password"}
                         id='password'
                         value={formData.password}
@@ -220,6 +233,7 @@ function AuthTemplate({ container }: authTemplateProps) {
                     <label className='text-xs font-normal mb-1' htmlFor='mobile'>Mobile Number</label>
                     <input
                       type='tel'
+                      data-testid="register-mobileNumber"
                       id='mobile'
                       value={formData.mobile}
                       onChange={handleChange}
@@ -237,6 +251,7 @@ function AuthTemplate({ container }: authTemplateProps) {
                   <div className='flex flex-col items-center'>
                     <label className='text-xs font-normal self-start' htmlFor='email'>Email Id</label>
                     <input
+                      data-testid="login-email-input"
                       onChange={handleChange}
                       type='email'
                       id='email'
@@ -249,6 +264,7 @@ function AuthTemplate({ container }: authTemplateProps) {
                     <label className='text-xs font-normal self-start' htmlFor='password'>Password</label>
                     <div className='relative flex-col w-full justify-center'>
                       <input
+                        data-testid="login-password-input"
                         onChange={handleChange}
                         type={passwordVisible ? "text" : "password"}
                         id='password'
@@ -257,11 +273,13 @@ function AuthTemplate({ container }: authTemplateProps) {
                       />
                       {passwordVisible ? (
                         <IoEyeOff
+                          data-testid="eye-icon"
                           onClick={() => setPasswordVisible(!passwordVisible)}
                           className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]'
                         />
                       ) : (
                         <IoEye
+                          data-testid="eye-icon"
                           onClick={() => setPasswordVisible(!passwordVisible)}
                           className='absolute right-2 top-3 cursor-pointer text-[#9D9D9D]'
                         />
