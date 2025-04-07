@@ -13,6 +13,7 @@ import { removeCartItem, removeWishlist } from '../../api/bookApi';
 import { resetWishList } from '../../services/slice/wishlistSlice';
 import { toast } from 'react-toastify';
 import { SearchContext } from '../../context/SearchProvider';
+import { resetBookList } from '../../services/slice/bookSlice';
 
 type headerProps = {
     container?: string
@@ -49,6 +50,7 @@ const Header = ({ container }: headerProps) => {
         localStorage.removeItem('name')
         await persistor.purge()
         await persistor.flush();
+        localStorage.removeItem('persist:root');
         navigate("/")
         toast.success("Logged out successfully")
     }
