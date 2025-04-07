@@ -52,15 +52,15 @@ const BookCatalogue = () => {
     
         if (sortQuery === 'highToLow') {
             sortedArray.sort((a, b) => {
-                if (a.price === 0 && b.price !== 0) return 1; 
-                if (b.price === 0 && a.price !== 0) return -1; 
-                return b.price - a.price;
+                if (a.discountPrice === 0 && b.discountPrice !== 0) return 1; 
+                if (b.discountPrice === 0 && a.discountPrice !== 0) return -1; 
+                return b.discountPrice - a.discountPrice;
             });
         } else if (sortQuery === 'lowToHigh') {
             sortedArray.sort((a, b) => {
-                if (a.price === 0 && b.price !== 0) return 1; 
-                if (b.price === 0 && a.price !== 0) return -1;
-                return a.price - b.price;
+                if (a.discountPrice === 0 && b.discountPrice !== 0) return 1; 
+                if (b.discountPrice === 0 && a.discountPrice !== 0) return -1;
+                return a.discountPrice - b.discountPrice;
             });
         }
         return sortedArray;
