@@ -59,7 +59,14 @@ function Wishlist() {
                         <p className='font-semibold'>My WishList ({wishList.length})</p>
                     </div>
                     {
-                        wishList.map((order, index) => {
+                        wishList.length === 0 && (
+                            <div className='flex flex-col items-center justify-center h-[50vh]'>
+                                <p className='text-[#A03037] font-semibold text-lg mt-4'>Your wishlist is empty</p>
+                            </div>
+                        )
+                    }
+                    {
+                        wishList.length > 0 && wishList.map((order, index) => {
                             return (
                                 <div key={index}>
                                     <BookLongCard 
