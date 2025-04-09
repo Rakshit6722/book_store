@@ -13,7 +13,7 @@ axiosInstance.interceptors.request.use(
     (error) => {
         console.error("Request error", error.message);
         return Promise.reject(error);
-    }
+      }
 )
 
 export const apiConnector = (method: Method, url: string, data?: any, headers?: any): Promise<AxiosResponse> => {
